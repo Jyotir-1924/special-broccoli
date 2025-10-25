@@ -15,7 +15,7 @@ export default function NewPostPage() {
   const { data: categories } = trpc.categories.getAll.useQuery();
   const createPost = trpc.posts.create.useMutation({
     onSuccess: (data) => {
-      router.push(`/blog/${data.slug}`);
+      router.push(`/blog/post/${data.slug}`);
     },
   });
 
@@ -42,12 +42,20 @@ export default function NewPostPage() {
       <Navbar />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-8">Write New Post</h1>
+        <h1 className="text-4xl font-bold text-gray-900 mb-8">
+          Write New Post
+        </h1>
 
-        <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-sm border p-8">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white rounded-lg shadow-sm border p-8"
+        >
           {/* Title */}
           <div className="mb-6">
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="title"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Title
             </label>
             <input
@@ -63,7 +71,10 @@ export default function NewPostPage() {
 
           {/* Content */}
           <div className="mb-6">
-            <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="content"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Content
             </label>
             <textarea
@@ -111,7 +122,9 @@ export default function NewPostPage() {
                 onChange={(e) => setPublished(e.target.checked)}
                 className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
               />
-              <span className="ml-2 text-sm text-gray-700">Publish immediately</span>
+              <span className="ml-2 text-sm text-gray-700">
+                Publish immediately
+              </span>
             </label>
             <p className="text-xs text-gray-500 mt-1">
               Uncheck to save as draft
@@ -125,7 +138,11 @@ export default function NewPostPage() {
               disabled={createPost.isPending}
               className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition disabled:opacity-50"
             >
-              {createPost.isPending ? "Creating..." : published ? "Publish Post" : "Save Draft"}
+              {createPost.isPending
+                ? "Creating..."
+                : published
+                ? "Publish Post"
+                : "Save Draft"}
             </button>
             <button
               type="button"
@@ -137,7 +154,9 @@ export default function NewPostPage() {
           </div>
 
           {createPost.error && (
-            <p className="mt-4 text-red-600 text-sm">{createPost.error.message}</p>
+            <p className="mt-4 text-red-600 text-sm">
+              {createPost.error.message}
+            </p>
           )}
         </form>
       </div>

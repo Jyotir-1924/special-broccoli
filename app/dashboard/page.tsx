@@ -35,16 +35,26 @@ export default function DashboardPage() {
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <h3 className="text-gray-500 text-sm font-medium mb-2">Total Posts</h3>
-            <p className="text-3xl font-bold text-gray-900">{allPosts?.length || 0}</p>
+            <h3 className="text-gray-500 text-sm font-medium mb-2">
+              Total Posts
+            </h3>
+            <p className="text-3xl font-bold text-gray-900">
+              {allPosts?.length || 0}
+            </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <h3 className="text-gray-500 text-sm font-medium mb-2">Published</h3>
-            <p className="text-3xl font-bold text-green-600">{publishedPosts.length}</p>
+            <h3 className="text-gray-500 text-sm font-medium mb-2">
+              Published
+            </h3>
+            <p className="text-3xl font-bold text-green-600">
+              {publishedPosts.length}
+            </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-sm border">
             <h3 className="text-gray-500 text-sm font-medium mb-2">Drafts</h3>
-            <p className="text-3xl font-bold text-yellow-600">{draftPosts.length}</p>
+            <p className="text-3xl font-bold text-yellow-600">
+              {draftPosts.length}
+            </p>
           </div>
         </div>
 
@@ -57,23 +67,25 @@ export default function DashboardPage() {
           <>
             {/* Published Posts */}
             <div className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Published Posts</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                Published Posts
+              </h2>
               {publishedPosts.length === 0 ? (
                 <div className="bg-white rounded-lg border p-6 text-center text-gray-600">
                   No published posts yet.
                 </div>
               ) : (
-                <div className="bg-white rounded-lg shadow-sm border overflow-hidden">
+                <div className="bg-white rounded-lg shadow-sm border overflow-x-auto">
                   <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-gray-50">
                       <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Title
                         </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
                           Created
                         </th>
-                        <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th className="px-4 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Actions
                         </th>
                       </tr>
@@ -81,21 +93,21 @@ export default function DashboardPage() {
                     <tbody className="bg-white divide-y divide-gray-200">
                       {publishedPosts.map((post) => (
                         <tr key={post.id}>
-                          <td className="px-6 py-4 whitespace-nowrap">
+                          <td className="px-4 sm:px-6 py-4">
                             <Link
-                              href={`/blog/${post.slug}`}
-                              className="text-blue-600 hover:text-blue-800 font-medium"
+                              href={`/blog/post/${post.slug}`}
+                              className="text-blue-600 hover:text-blue-800 font-medium text-sm break-words"
                             >
                               {post.title}
                             </Link>
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden sm:table-cell">
                             {new Date(post.createdAt).toLocaleDateString()}
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                          <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <Link
                               href={`/blog/edit/${post.id}`}
-                              className="text-blue-600 hover:text-blue-900 mr-4"
+                              className="text-blue-600 hover:text-blue-900 mr-2 sm:mr-4"
                             >
                               Edit
                             </Link>
@@ -122,17 +134,17 @@ export default function DashboardPage() {
                   No drafts.
                 </div>
               ) : (
-                <div className="bg-white rounded-lg shadow-sm border overflow-hidden">
+                <div className="bg-white rounded-lg shadow-sm border overflow-x-auto">
                   <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-gray-50">
                       <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Title
                         </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
                           Created
                         </th>
-                        <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th className="px-4 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Actions
                         </th>
                       </tr>
@@ -140,19 +152,23 @@ export default function DashboardPage() {
                     <tbody className="bg-white divide-y divide-gray-200">
                       {draftPosts.map((post) => (
                         <tr key={post.id}>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <span className="text-gray-900 font-medium">{post.title}</span>
-                            <span className="ml-2 bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">
-                              Draft
-                            </span>
+                          <td className="px-4 sm:px-6 py-4">
+                            <div className="flex flex-col sm:flex-row sm:items-center">
+                              <span className="text-gray-900 font-medium text-sm break-words">
+                                {post.title}
+                              </span>
+                              <span className="mt-1 sm:mt-0 sm:ml-2 bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded inline-block w-fit">
+                                Draft
+                              </span>
+                            </div>
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden sm:table-cell">
                             {new Date(post.createdAt).toLocaleDateString()}
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                          <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <Link
                               href={`/blog/edit/${post.id}`}
-                              className="text-blue-600 hover:text-blue-900 mr-4"
+                              className="text-blue-600 hover:text-blue-900 mr-2 sm:mr-4"
                             >
                               Edit
                             </Link>
