@@ -1,9 +1,11 @@
 "use client";
 
 import { Navbar } from "@/components/navbar";
+import { RichTextEditor } from "@/components/rich-text-editor";
 import { trpc } from "@/lib/trpc";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 export default function NewPostPage() {
   const router = useRouter();
@@ -41,21 +43,26 @@ export default function NewPostPage() {
     <div className="min-h-screen bg-gray-50">
       <Navbar />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-8">
-          Write New Post
-        </h1>
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 mt-20">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">Write New Post</h1>
+          <p className="text-gray-600 mb-8">Share your thoughts with the world</p>
+        </motion.div>
 
-        <form
+        <motion.form
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
           onSubmit={handleSubmit}
-          className="bg-white rounded-lg shadow-sm border p-8"
+          className="bg-white rounded-xl shadow-lg border p-8"
         >
           {/* Title */}
           <div className="mb-6">
-            <label
-              htmlFor="title"
-              className="block text-sm font-medium text-gray-700 mb-2"
-            >
+            <label htmlFor="title" className="block text-sm font-semibold text-gray-700 mb-2">
               Title
             </label>
             <input
@@ -63,102 +70,99 @@ export default function NewPostPage() {
               id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Enter post title..."
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff751f] focus:border-transparent transition-all"
+              placeholder="Enter an engaging title..."
               required
             />
           </div>
 
-          {/* Content */}
+          {/* Content - Rich Text Editor */}
           <div className="mb-6">
-            <label
-              htmlFor="content"
-              className="block text-sm font-medium text-gray-700 mb-2"
-            >
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
               Content
             </label>
-            <textarea
-              id="content"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              rows={15}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Write your post content..."
-              required
+            <RichTextEditor
+              content={content}
+              onChange={setContent}
+              placeholder="Start writing your amazing content..."
             />
           </div>
 
           {/* Categories */}
           {categories && categories.length > 0 && (
             <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-3">
                 Categories (Optional)
               </label>
               <div className="flex flex-wrap gap-2">
                 {categories.map((category) => (
-                  <button
+                  <motion.button
                     key={category.id}
                     type="button"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => toggleCategory(category.id)}
-                    className={`px-4 py-2 rounded-md text-sm font-medium transition ${
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                       selectedCategories.includes(category.id)
-                        ? "bg-blue-600 text-white"
+                        ? "bg-[#ff751f] text-white shadow-md"
                         : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                     }`}
                   >
                     {category.name}
-                  </button>
+                  </motion.button>
                 ))}
               </div>
             </div>
           )}
 
           {/* Published Status */}
-          <div className="mb-6">
-            <label className="flex items-center">
+          <div className="mb-8">
+            <label className="flex items-center cursor-pointer">
               <input
                 type="checkbox"
                 checked={published}
                 onChange={(e) => setPublished(e.target.checked)}
-                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                className="w-5 h-5 text-[#ff751f] border-gray-300 rounded focus:ring-[#ff751f] cursor-pointer"
               />
-              <span className="ml-2 text-sm text-gray-700">
-                Publish immediately
-              </span>
+              <span className="ml-3 text-sm font-medium text-gray-700">Publish immediately</span>
             </label>
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-gray-500 mt-2 ml-8">
               Uncheck to save as draft
             </p>
           </div>
 
           {/* Actions */}
           <div className="flex gap-4">
-            <button
+            <motion.button
               type="submit"
               disabled={createPost.isPending}
-              className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition disabled:opacity-50"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="px-8 py-3 bg-[#ff751f] text-white rounded-lg hover:bg-[#e66a1a] transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {createPost.isPending
-                ? "Creating..."
-                : published
-                ? "Publish Post"
-                : "Save Draft"}
-            </button>
-            <button
+              {createPost.isPending ? "Creating..." : published ? "Publish Post" : "Save Draft"}
+            </motion.button>
+            <motion.button
               type="button"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               onClick={() => router.back()}
-              className="px-6 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition"
+              className="px-8 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-semibold"
             >
               Cancel
-            </button>
+            </motion.button>
           </div>
 
           {createPost.error && (
-            <p className="mt-4 text-red-600 text-sm">
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="mt-4 text-red-600 text-sm"
+            >
               {createPost.error.message}
-            </p>
+            </motion.p>
           )}
-        </form>
+        </motion.form>
       </div>
     </div>
   );
