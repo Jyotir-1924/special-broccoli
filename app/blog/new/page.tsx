@@ -3,9 +3,9 @@
 import { Navbar } from "@/components/navbar";
 import { RichTextEditor } from "@/components/rich-text-editor";
 import { trpc } from "@/lib/trpc";
+import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { motion } from "framer-motion";
 
 export default function NewPostPage() {
   const router = useRouter();
@@ -49,8 +49,12 @@ export default function NewPostPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">Write New Post</h1>
-          <p className="text-gray-600 mb-8">Share your thoughts with the world</p>
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">
+            Write New Post
+          </h1>
+          <p className="text-gray-600 mb-8">
+            Share your thoughts with the world
+          </p>
         </motion.div>
 
         <motion.form
@@ -62,7 +66,10 @@ export default function NewPostPage() {
         >
           {/* Title */}
           <div className="mb-6">
-            <label htmlFor="title" className="block text-sm font-semibold text-gray-700 mb-2">
+            <label
+              htmlFor="title"
+              className="block text-sm font-semibold text-gray-700 mb-2"
+            >
               Title
             </label>
             <input
@@ -70,7 +77,7 @@ export default function NewPostPage() {
               id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff751f] focus:border-transparent transition-all"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff751f] focus:border-transparent transition-all text-black placeholder-gray-400"
               placeholder="Enter an engaging title..."
               required
             />
@@ -124,7 +131,9 @@ export default function NewPostPage() {
                 onChange={(e) => setPublished(e.target.checked)}
                 className="w-5 h-5 text-[#ff751f] border-gray-300 rounded focus:ring-[#ff751f] cursor-pointer"
               />
-              <span className="ml-3 text-sm font-medium text-gray-700">Publish immediately</span>
+              <span className="ml-3 text-sm font-medium text-gray-700">
+                Publish immediately
+              </span>
             </label>
             <p className="text-xs text-gray-500 mt-2 ml-8">
               Uncheck to save as draft
@@ -140,7 +149,11 @@ export default function NewPostPage() {
               whileTap={{ scale: 0.98 }}
               className="px-8 py-3 bg-[#ff751f] text-white rounded-lg hover:bg-[#e66a1a] transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {createPost.isPending ? "Creating..." : published ? "Publish Post" : "Save Draft"}
+              {createPost.isPending
+                ? "Creating..."
+                : published
+                ? "Publish Post"
+                : "Save Draft"}
             </motion.button>
             <motion.button
               type="button"

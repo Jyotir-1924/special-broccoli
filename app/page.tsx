@@ -1,8 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { Navbar } from "@/components/navbar";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   const fadeInUp = {
@@ -39,7 +40,11 @@ export default function Home() {
 
         {/* Hero Content */}
         <div className="container relative z-10 text-center py-32">
-          <motion.div initial="initial" animate="animate" variants={staggerContainer}>
+          <motion.div
+            initial="initial"
+            animate="animate"
+            variants={staggerContainer}
+          >
             {/* Badge */}
             <motion.div variants={fadeInUp} className="mb-8">
               <span className="inline-flex items-center px-6 py-2 rounded-full bg-[#ff751f]/10 text-[#ff751f] font-semibold text-sm border border-[#ff751f]/20">
@@ -74,7 +79,10 @@ export default function Home() {
               variants={fadeInUp}
               className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             >
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Link
                   href="/blog"
                   className="inline-flex items-center px-8 py-4 bg-linear-to-r from-[#ff751f] to-[#e66a1a] text-white text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300"
@@ -96,7 +104,10 @@ export default function Home() {
                 </Link>
               </motion.div>
 
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Link
                   href="/blog/new"
                   className="inline-flex items-center px-8 py-4 bg-black text-white text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-black hover:bg-gray-900"
@@ -229,7 +240,8 @@ export default function Home() {
               Ready to Start Your Journey?
             </h2>
             <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
-              Join our community of writers and share your unique voice with the world.
+              Join our community of writers and share your unique voice with the
+              world.
             </p>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
@@ -261,29 +273,42 @@ export default function Home() {
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
             <div className="col-span-1 ml-4 md:col-span-2">
-              <h3 className="text-2xl font-bold mb-4">
-                <span className="text-[#ff751f]">Blog</span>smith
-              </h3>
-              <p className="text-gray-400 mb-6 max-w-md">
-                A modern blogging platform built for writers who care about their craft.
-                Create, publish, and share your stories with ease.
+              <Image
+                src="/assets/images/BSlogo.png"
+                alt="Blogsmith Logo"
+                width={300}
+                height={80}
+                priority
+              />
+              <p className="text-gray-400 mb-6 max-w-md text-xl">
+                A modern blogging platform built for writers who care about
+                their craft. Create, publish, and share your stories with ease.
               </p>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Quick Links</h4>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/blog" className="text-gray-400 hover:text-[#ff751f] transition-colors">
+                  <Link
+                    href="/blog"
+                    className="text-gray-400 hover:text-[#ff751f] transition-colors"
+                  >
                     All Blogs
                   </Link>
                 </li>
                 <li>
-                  <Link href="/dashboard" className="text-gray-400 hover:text-[#ff751f] transition-colors">
+                  <Link
+                    href="/dashboard"
+                    className="text-gray-400 hover:text-[#ff751f] transition-colors"
+                  >
                     Dashboard
                   </Link>
                 </li>
                 <li>
-                  <Link href="/dashboard/categories" className="text-gray-400 hover:text-[#ff751f] transition-colors">
+                  <Link
+                    href="/dashboard/categories"
+                    className="text-gray-400 hover:text-[#ff751f] transition-colors"
+                  >
                     Categories
                   </Link>
                 </li>

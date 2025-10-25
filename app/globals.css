@@ -67,3 +67,11 @@ body {
   background-size: 200% 200%;
   animation: gradient-x 8s ease infinite;
 }
+
+.ProseMirror p[data-placeholder]::before {
+  content: attr(data-placeholder);
+  color: black;
+  opacity: 0.5;
+  pointer-events: none;
+  height: 0;
+}

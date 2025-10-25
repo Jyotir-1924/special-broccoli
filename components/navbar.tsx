@@ -40,19 +40,19 @@ export function Navbar() {
           <div className="hidden md:flex items-center space-x-1">
             <Link
               href="/blog"
-              className="text-gray-700 hover:text-[#ff751f] px-4 py-2 rounded-lg text-base font-medium transition-all duration-200 hover:bg-gray-50"
+              className="text-gray-700 hover:text-[#000000] px-4 py-2 rounded-lg text-base font-medium transition-all duration-200 hover:bg-[#ff751f]"
             >
               Blog
             </Link>
             <Link
               href="/dashboard"
-              className="text-gray-700 hover:text-[#ff751f] px-4 py-2 rounded-lg text-base font-medium transition-all duration-200 hover:bg-gray-50"
+              className="text-gray-700 hover:text-[#000000] px-4 py-2 rounded-lg text-base font-medium transition-all duration-200 hover:bg-[#ff751f]"
             >
               Dashboard
             </Link>
             <Link
               href="/dashboard/categories"
-              className="text-gray-700 hover:text-[#ff751f] px-4 py-2 rounded-lg text-base font-medium transition-all duration-200 hover:bg-gray-50"
+              className="text-gray-700 hover:text-[#000000] px-4 py-2 rounded-lg text-base font-medium transition-all duration-200 hover:bg-[#ff751f]"
             >
               Categories
             </Link>

@@ -188,8 +188,11 @@ export function RichTextEditor({ content, onChange, placeholder }: RichTextEdito
       </div>
 
       {/* Editor */}
-      <div className="bg-white">
-        <EditorContent editor={editor} />
+      <div className="bg-white min-h-60 p-4">
+        <EditorContent
+        editor={editor}
+        className="outline-none ProseMirror text-black"
+        />
       </div>
     </div>
   );
