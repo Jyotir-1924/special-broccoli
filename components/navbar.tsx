@@ -1,8 +1,9 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
+import { useState } from "react";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,11 +22,17 @@ export function Navbar() {
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400 }}
           >
-            <Link href="/assets/images/BSlogo.png" className="flex items-center space-x-2">
-              <span className="text-3xl font-bold">
-                <span className="text-[#ff751f]">Blog</span>
-                <span className="text-black">smith</span>
-              </span>
+            <Link
+              href="/"
+              className="flex items-center space-x-2"
+            >
+              <Image
+                src="/assets/images/BSlogo.png"
+                alt="Blogsmith Logo"
+                width={200}
+                height={80}
+                priority
+              />
             </Link>
           </motion.div>
 

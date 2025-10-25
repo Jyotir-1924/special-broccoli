@@ -18,7 +18,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100">
       <Navbar />
 
       {/* Hero Section */}
@@ -28,12 +28,12 @@ export default function Home() {
           <motion.div
             animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-to-br from-[#ff751f]/10 to-transparent rounded-full blur-3xl"
+            className="absolute -top-1/2 -right-1/2 w-full h-full bg-linear-to-br from-[#ff751f]/10 to-transparent rounded-full blur-3xl"
           />
           <motion.div
             animate={{ scale: [1.2, 1, 1.2], rotate: [90, 0, 90] }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="absolute -bottom-1/2 -left-1/2 w-full h-full bg-gradient-to-tr from-black/5 to-transparent rounded-full blur-3xl"
+            className="absolute -bottom-1/2 -left-1/2 w-full h-full bg-linear-to-tr from-black/5 to-transparent rounded-full blur-3xl"
           />
         </div>
 
@@ -52,7 +52,7 @@ export default function Home() {
               variants={fadeInUp}
               className="text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight"
             >
-              <span className="bg-gradient-to-r from-[#ff751f] to-[#000000] bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-[#ff751f] to-[#000000] bg-clip-text text-transparent">
                 Share Your Stories
               </span>
               <br />
@@ -77,7 +77,7 @@ export default function Home() {
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Link
                   href="/blog"
-                  className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#ff751f] to-[#e66a1a] text-white text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300"
+                  className="inline-flex items-center px-8 py-4 bg-linear-to-r from-[#ff751f] to-[#e66a1a] text-white text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300"
                 >
                   <span>Explore Blogs</span>
                   <svg
@@ -200,7 +200,7 @@ export default function Home() {
                 whileHover={{ y: -10, transition: { duration: 0.2 } }}
                 className="relative group"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-[#ff751f]/10 to-transparent rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300" />
+                <div className="absolute inset-0 bg-linear-to-r from-[#ff751f]/10 to-transparent rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300" />
                 <div className="relative bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300">
                   <div className="text-6xl mb-6">{feature.icon}</div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">
@@ -217,7 +217,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-32 bg-gradient-to-br from-[#ff751f] to-[#000000] relative overflow-hidden">
+      <section className="py-32 bg-linear-to-br from-[#ff751f] to-[#000000] relative overflow-hidden">
         <div className="container relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -260,7 +260,7 @@ export default function Home() {
       <footer className="bg-black text-white py-16">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-            <div className="col-span-1 md:col-span-2">
+            <div className="col-span-1 ml-4 md:col-span-2">
               <h3 className="text-2xl font-bold mb-4">
                 <span className="text-[#ff751f]">Blog</span>smith
               </h3>
