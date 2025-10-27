@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 interface BlogCardProps {
   id: number;
@@ -12,11 +12,18 @@ interface BlogCardProps {
   createdAt: Date | string;
 }
 
-export function BlogCard({ id, title, content, slug, published, createdAt }: BlogCardProps) {
-  // Strip HTML tags and get plain text excerpt
-  const plainText = content.replace(/<[^>]*>/g, '');
-  const excerpt = plainText.length > 150 ? plainText.substring(0, 150) + "..." : plainText;
-  
+export function BlogCard({
+  id,
+  title,
+  content,
+  slug,
+  published,
+  createdAt,
+}: BlogCardProps) {
+  const plainText = content.replace(/<[^>]*>/g, "");
+  const excerpt =
+    plainText.length > 150 ? plainText.substring(0, 150) + "..." : plainText;
+
   const formattedDate = new Date(createdAt).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
@@ -40,7 +47,9 @@ export function BlogCard({ id, title, content, slug, published, createdAt }: Blo
           </span>
         )}
       </div>
+
       <p className="text-gray-600 mb-4 line-clamp-3">{excerpt}</p>
+
       <div className="flex justify-between items-center">
         <span className="text-sm text-gray-500">{formattedDate}</span>
         <Link
@@ -48,8 +57,18 @@ export function BlogCard({ id, title, content, slug, published, createdAt }: Blo
           className="text-[#ff751f] hover:text-[#e66a1a] font-medium text-sm flex items-center gap-1 transition-colors"
         >
           Read more
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
           </svg>
         </Link>
       </div>

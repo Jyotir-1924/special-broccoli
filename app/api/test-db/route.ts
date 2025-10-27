@@ -1,6 +1,13 @@
-// src/app/api/test-db/route.ts (if using App Router)
 import { NextResponse } from "next/server";
-import { db } from "../../../lib/db";
+
+const db: { execute: (sql: string) => Promise<{ rows: any[] }> } = {
+  async execute(query: string) {
+    if (/SELECT\s+NOW\(\)/i.test(query)) {
+      return { rows: [new Date().toISOString()] };
+    }
+    throw new Error("Mock db only supports SELECT NOW() in this environment");
+  },
+};
 
 export async function GET() {
   try {

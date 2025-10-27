@@ -22,7 +22,6 @@ export default function BlogPage() {
       <Navbar />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 mt-20">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -37,7 +36,6 @@ export default function BlogPage() {
           </p>
         </motion.div>
 
-        {/* Category Filter */}
         {categories && categories.length > 0 && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -80,7 +78,6 @@ export default function BlogPage() {
           </motion.div>
         )}
 
-        {/* Blog Posts */}
         {postsLoading ? (
           <div className="text-center py-20">
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-4 border-[#ff751f]"></div>

@@ -64,7 +64,6 @@ export default function NewPostPage() {
           onSubmit={handleSubmit}
           className="bg-white rounded-xl shadow-lg border p-8"
         >
-          {/* Title */}
           <div className="mb-6">
             <label
               htmlFor="title"
@@ -82,8 +81,6 @@ export default function NewPostPage() {
               required
             />
           </div>
-
-          {/* Content - Rich Text Editor */}
           <div className="mb-6">
             <label className="block text-sm font-semibold text-gray-700 mb-2">
               Content
@@ -94,8 +91,6 @@ export default function NewPostPage() {
               placeholder="Start writing your amazing content..."
             />
           </div>
-
-          {/* Categories */}
           {categories && categories.length > 0 && (
             <div className="mb-6">
               <label className="block text-sm font-semibold text-gray-700 mb-3">
@@ -121,8 +116,6 @@ export default function NewPostPage() {
               </div>
             </div>
           )}
-
-          {/* Published Status */}
           <div className="mb-8">
             <label className="flex items-center cursor-pointer">
               <input
@@ -139,8 +132,6 @@ export default function NewPostPage() {
               Uncheck to save as draft
             </p>
           </div>
-
-          {/* Actions */}
           <div className="flex gap-4">
             <motion.button
               type="submit"

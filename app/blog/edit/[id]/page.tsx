@@ -112,7 +112,6 @@ export default function EditPostPage() {
           onSubmit={handleSubmit}
           className="bg-white rounded-xl shadow-lg border p-8"
         >
-          {/* Title */}
           <div className="mb-6">
             <label htmlFor="title" className="block text-sm font-semibold text-gray-700 mb-2">
               Title
@@ -126,8 +125,6 @@ export default function EditPostPage() {
               required
             />
           </div>
-
-          {/* Content - Rich Text Editor */}
           <div className="mb-6">
             <label className="block text-sm font-semibold text-gray-700 mb-2">
               Content
@@ -137,8 +134,6 @@ export default function EditPostPage() {
               onChange={setContent}
             />
           </div>
-
-          {/* Categories */}
           {categories && categories.length > 0 && (
             <div className="mb-6">
               <label className="block text-sm font-semibold text-gray-700 mb-3">
@@ -164,8 +159,6 @@ export default function EditPostPage() {
               </div>
             </div>
           )}
-
-          {/* Published Status */}
           <div className="mb-8">
             <label className="flex items-center cursor-pointer">
               <input
@@ -177,8 +170,6 @@ export default function EditPostPage() {
               <span className="ml-3 text-sm font-medium text-gray-700">Published</span>
             </label>
           </div>
-
-          {/* Actions */}
           <div className="flex flex-wrap gap-4">
             <motion.button
               type="submit"

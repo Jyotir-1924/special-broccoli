@@ -2,8 +2,8 @@
 
 import { Navbar } from "@/components/navbar";
 import { trpc } from "@/lib/trpc";
-import Link from "next/link";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function DashboardPage() {
   const { data: allPosts, isLoading } = trpc.posts.getAll.useQuery({});
@@ -17,7 +17,11 @@ export default function DashboardPage() {
   const draftPosts = allPosts?.filter((post) => !post.published) || [];
 
   const handleDelete = (id: number, title: string) => {
-    if (confirm(`Are you sure you want to delete "${title}"? This action cannot be undone.`)) {
+    if (
+      confirm(
+        `Are you sure you want to delete "${title}"? This action cannot be undone.`
+      )
+    ) {
       deletePost.mutate({ id });
     }
   };
@@ -27,18 +31,18 @@ export default function DashboardPage() {
       <Navbar />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 mt-20">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="mb-8"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Dashboard</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Dashboard
+          </h1>
           <p className="text-gray-600 text-lg">Manage all your blog posts</p>
         </motion.div>
 
-        {/* Stats */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -49,22 +53,32 @@ export default function DashboardPage() {
             whileHover={{ y: -5 }}
             className="bg-white p-6 rounded-xl shadow-md border-l-4 border-[#ff751f]"
           >
-            <h3 className="text-gray-500 text-sm font-medium mb-2">Total Posts</h3>
-            <p className="text-4xl font-bold text-gray-900">{allPosts?.length || 0}</p>
+            <h3 className="text-gray-500 text-sm font-medium mb-2">
+              Total Posts
+            </h3>
+            <p className="text-4xl font-bold text-gray-900">
+              {allPosts?.length || 0}
+            </p>
           </motion.div>
           <motion.div
             whileHover={{ y: -5 }}
             className="bg-white p-6 rounded-xl shadow-md border-l-4 border-green-500"
           >
-            <h3 className="text-gray-500 text-sm font-medium mb-2">Published</h3>
-            <p className="text-4xl font-bold text-green-600">{publishedPosts.length}</p>
+            <h3 className="text-gray-500 text-sm font-medium mb-2">
+              Published
+            </h3>
+            <p className="text-4xl font-bold text-green-600">
+              {publishedPosts.length}
+            </p>
           </motion.div>
           <motion.div
             whileHover={{ y: -5 }}
             className="bg-white p-6 rounded-xl shadow-md border-l-4 border-yellow-500"
           >
             <h3 className="text-gray-500 text-sm font-medium mb-2">Drafts</h3>
-            <p className="text-4xl font-bold text-yellow-600">{draftPosts.length}</p>
+            <p className="text-4xl font-bold text-yellow-600">
+              {draftPosts.length}
+            </p>
           </motion.div>
         </motion.div>
 
@@ -75,14 +89,15 @@ export default function DashboardPage() {
           </div>
         ) : (
           <>
-            {/* Published Posts */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
               className="mb-8"
             >
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Published Posts</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                Published Posts
+              </h2>
               {publishedPosts.length === 0 ? (
                 <div className="bg-white rounded-xl border p-8 text-center text-gray-600">
                   <div className="text-5xl mb-3">📝</div>
@@ -115,7 +130,7 @@ export default function DashboardPage() {
                           <td className="px-4 sm:px-6 py-4">
                             <Link
                               href={`/blog/post/${post.slug}`}
-                              className="text-[#ff751f] hover:text-[#e66a1a] font-medium text-sm break-words transition-colors"
+                              className="text-[#ff751f] hover:text-[#e66a1a] font-medium text-sm wrap-break-word transition-colors"
                             >
                               {post.title}
                             </Link>
@@ -145,13 +160,14 @@ export default function DashboardPage() {
               )}
             </motion.div>
 
-            {/* Draft Posts */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
             >
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Drafts</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                Drafts
+              </h2>
               {draftPosts.length === 0 ? (
                 <div className="bg-white rounded-xl border p-8 text-center text-gray-600">
                   <div className="text-5xl mb-3">✅</div>
@@ -183,7 +199,7 @@ export default function DashboardPage() {
                         >
                           <td className="px-4 sm:px-6 py-4">
                             <div className="flex flex-col sm:flex-row sm:items-center">
-                              <span className="text-gray-900 font-medium text-sm break-words">
+                              <span className="text-gray-900 font-medium text-sm wrap-break-word">
                                 {post.title}
                               </span>
                               <span className="mt-1 sm:mt-0 sm:ml-2 bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full inline-block w-fit font-medium">

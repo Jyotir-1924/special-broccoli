@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 export function Navbar() {
@@ -17,15 +17,11 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400 }}
           >
-            <Link
-              href="/"
-              className="flex items-center space-x-2"
-            >
+            <Link href="/" className="flex items-center space-x-2">
               <Image
                 src="/assets/images/BSlogo.png"
                 alt="Blogsmith Logo"
@@ -36,7 +32,6 @@ export function Navbar() {
             </Link>
           </motion.div>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
             <Link
               href="/blog"
@@ -83,7 +78,6 @@ export function Navbar() {
             </motion.div>
           </div>
 
-          {/* Mobile menu button */}
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -108,7 +102,6 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Navigation Menu */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div

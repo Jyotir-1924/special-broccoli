@@ -11,6 +11,7 @@ export default function CategoriesPage() {
   const [editingId, setEditingId] = useState<number | null>(null);
 
   const { data: categories, refetch } = trpc.categories.getAll.useQuery();
+
   const createCategory = trpc.categories.create.useMutation({
     onSuccess: () => {
       setName("");
@@ -18,6 +19,7 @@ export default function CategoriesPage() {
       refetch();
     },
   });
+
   const updateCategory = trpc.categories.update.useMutation({
     onSuccess: () => {
       setEditingId(null);
@@ -26,6 +28,7 @@ export default function CategoriesPage() {
       refetch();
     },
   });
+
   const deleteCategory = trpc.categories.delete.useMutation({
     onSuccess: () => {
       refetch();
@@ -69,11 +72,14 @@ export default function CategoriesPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">Manage Categories</h1>
-          <p className="text-gray-600 mb-8 text-lg">Organize your blog posts with categories</p>
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">
+            Manage Categories
+          </h1>
+          <p className="text-gray-600 mb-8 text-lg">
+            Organize your blog posts with categories
+          </p>
         </motion.div>
 
-        {/* Create/Edit Form */}
         <motion.form
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -81,12 +87,15 @@ export default function CategoriesPage() {
           onSubmit={handleSubmit}
           className="bg-white rounded-xl shadow-md border p-6 mb-8"
         >
-          <h2 className="text-xl font-semibold mb-4">
+          <h2 className="text-xl font-semibold mb-4 text-black">
             {editingId ? "Edit Category" : "Create New Category"}
           </h2>
 
           <div className="mb-4">
-            <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
+            <label
+              htmlFor="name"
+              className="block text-sm font-semibold text-gray-700 mb-2"
+            >
               Name
             </label>
             <input
@@ -101,7 +110,10 @@ export default function CategoriesPage() {
           </div>
 
           <div className="mb-6">
-            <label htmlFor="description" className="block text-sm font-semibold text-gray-700 mb-2">
+            <label
+              htmlFor="description"
+              className="block text-sm font-semibold text-gray-700 mb-2"
+            >
               Description (Optional)
             </label>
             <textarea
@@ -138,14 +150,15 @@ export default function CategoriesPage() {
           </div>
         </motion.form>
 
-        {/* Categories List */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
           className="bg-white rounded-xl shadow-md border overflow-hidden"
         >
-          <h2 className="text-xl font-semibold p-6 border-b bg-gray-50">All Categories</h2>
+          <h2 className="text-xl font-semibold p-6 border-b bg-gray-50 text-black">
+            All Categories
+          </h2>
           {categories && categories.length > 0 ? (
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
@@ -184,7 +197,9 @@ export default function CategoriesPage() {
                           Edit
                         </button>
                         <button
-                          onClick={() => handleDelete(category.id, category.name)}
+                          onClick={() =>
+                            handleDelete(category.id, category.name)
+                          }
                           className="text-red-600 hover:text-red-900 transition-colors"
                         >
                           Delete
@@ -198,7 +213,9 @@ export default function CategoriesPage() {
           ) : (
             <div className="p-8 text-center text-gray-600">
               <div className="text-5xl mb-3">📁</div>
-              <p className="text-lg">No categories yet. Create your first category above.</p>
+              <p className="text-lg">
+                No categories yet. Create your first category above.
+              </p>
             </div>
           )}
         </motion.div>

@@ -3,14 +3,12 @@ import { Manrope, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { TRPCProvider } from "@/lib/trpc-provider";
 
-// Replace Geist with Manrope
 const manrope = Manrope({
   variable: "--font-manrope",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"], // optional
 });
 
-// Keep Geist Mono for code if desired
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
@@ -28,9 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${manrope.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${manrope.variable} ${geistMono.variable} antialiased`}>
         <TRPCProvider>{children}</TRPCProvider>
       </body>
     </html>

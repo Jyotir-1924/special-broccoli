@@ -2,8 +2,8 @@
 
 import { Navbar } from "@/components/navbar";
 import { motion } from "framer-motion";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   const fadeInUp = {
@@ -22,9 +22,7 @@ export default function Home() {
     <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100">
       <Navbar />
 
-      {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Animated Background */}
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
             animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
@@ -38,21 +36,18 @@ export default function Home() {
           />
         </div>
 
-        {/* Hero Content */}
         <div className="container relative z-10 text-center py-32">
           <motion.div
             initial="initial"
             animate="animate"
             variants={staggerContainer}
           >
-            {/* Badge */}
             <motion.div variants={fadeInUp} className="mb-8">
               <span className="inline-flex items-center px-6 py-2 rounded-full bg-[#ff751f]/10 text-[#ff751f] font-semibold text-sm border border-[#ff751f]/20">
                 ✨ Welcome to the Future of Blogging
               </span>
             </motion.div>
 
-            {/* Main Heading */}
             <motion.h1
               variants={fadeInUp}
               className="text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight"
@@ -64,7 +59,6 @@ export default function Home() {
               <span className="text-gray-900">with the World</span>
             </motion.h1>
 
-            {/* Subtitle */}
             <motion.p
               variants={fadeInUp}
               className="text-xl sm:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed"
@@ -74,7 +68,6 @@ export default function Home() {
               Join thousands of writers sharing their passion.
             </motion.p>
 
-            {/* CTA Buttons */}
             <motion.div
               variants={fadeInUp}
               className="flex flex-col sm:flex-row gap-4 justify-center items-center"
@@ -130,7 +123,6 @@ export default function Home() {
               </motion.div>
             </motion.div>
 
-            {/* Stats */}
             <motion.div
               variants={fadeInUp}
               className="mt-20 grid grid-cols-3 gap-8 max-w-2xl mx-auto"
@@ -151,7 +143,6 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Scroll Indicator */}
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
@@ -163,7 +154,6 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Features Section */}
       <section className="py-32 bg-white">
         <div className="container text-center">
           <motion.div
@@ -227,7 +217,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-32 bg-linear-to-br from-[#ff751f] to-[#000000] relative overflow-hidden">
         <div className="container relative z-10 text-center">
           <motion.div
@@ -268,7 +257,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="bg-black text-white py-16">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
