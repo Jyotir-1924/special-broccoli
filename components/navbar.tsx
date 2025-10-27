@@ -63,7 +63,7 @@ export function Navbar() {
             >
               <Link
                 href="/blog/new"
-                className="inline-flex items-center px-6 py-2.5 bg-gradient-to-r from-[#ff751f] to-[#e66a1a] text-white text-base font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
+                className="inline-flex items-center px-6 py-2.5 bg-linear-to-r from-[#ff751f] to-[#e66a1a] text-white text-base font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
               >
                 <svg
                   className="w-5 h-5 mr-2"
@@ -142,7 +142,7 @@ export function Navbar() {
                 </Link>
                 <Link
                   href="/blog/new"
-                  className="bg-gradient-to-r from-[#ff751f] to-[#e66a1a] text-white px-4 py-3 rounded-lg text-base font-semibold hover:shadow-lg transition-all text-center"
+                  className="bg-linear-to-r from-[#ff751f] to-[#e66a1a] text-white px-4 py-3 rounded-lg text-base font-semibold hover:shadow-lg transition-all text-center"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Write Post
