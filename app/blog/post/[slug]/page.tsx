@@ -3,9 +3,10 @@
 import { Navbar } from "@/components/navbar";
 import { trpc } from "@/lib/trpc";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 export default function BlogPostPage() {
   const params = useParams();
@@ -16,6 +17,7 @@ export default function BlogPostPage() {
     isLoading,
     error,
   } = trpc.posts.getBySlug.useQuery({ slug });
+  const { data: session } = useSession();
 
   if (isLoading) {
     return (
@@ -177,34 +179,39 @@ export default function BlogPostPage() {
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="mt-12 pt-8 border-t flex gap-4"
-          >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link
-                href={`/blog/edit/${post.id}`}
-                className="px-6 py-3 bg-[#ff751f] text-white rounded-lg hover:bg-[#e66a1a] transition-colors font-medium inline-flex items-center gap-2"
+          {session?.user?.id === post.authorId && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="mt-12 pt-8 border-t flex gap-4"
+            >
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                <Link
+                  href={`/blog/edit/${post.id}`}
+                  className="px-6 py-3 bg-[#ff751f] text-white rounded-lg hover:bg-[#e66a1a] transition-colors font-medium inline-flex items-center gap-2"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                  />
-                </svg>
-                Edit Post
-              </Link>
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                    />
+                  </svg>
+                  Edit Post
+                </Link>
+              </motion.div>
             </motion.div>
-          </motion.div>
+          )}
         </motion.div>
       </article>
     </div>

@@ -6,53 +6,101 @@ import { trpc } from "@/lib/trpc";
 import { useRouter, useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useSession } from "next-auth/react";
 
 export default function EditPostPage() {
   const router = useRouter();
   const params = useParams();
   const postId = parseInt(params.id as string);
 
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push("/auth/signin");
+    },
+  });
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [published, setPublished] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
+  const [isAuthorized, setIsAuthorized] = useState(false);
 
   const { data: post, isLoading } = trpc.posts.getById.useQuery({ id: postId });
   const { data: categories } = trpc.categories.getAll.useQuery();
+  
   const updatePost = trpc.posts.update.useMutation({
     onSuccess: (data) => {
       router.push(`/blog/post/${data.slug}`);
     },
+    onError: (error) => {
+      alert(error.message);
+    },
   });
+  
   const deletePost = trpc.posts.delete.useMutation({
     onSuccess: () => {
       router.push("/dashboard");
     },
+    onError: (error) => {
+      alert(error.message);
+    },
   });
 
   useEffect(() => {
-    if (post) {
+    if (post && session?.user?.id) {
       setTitle(post.title);
       setContent(post.content);
       setPublished(post.published);
       setSelectedCategories(post.categoryIds || []);
+
+      // Check if current user is the author
+      if (post.authorId === session.user.id) {
+        setIsAuthorized(true);
+      } else {
+        setIsAuthorized(false);
+      }
     }
-  }, [post]);
+  }, [post, session]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!session?.user?.id) {
+      router.push("/auth/signin");
+      return;
+    }
+
+    if (!isAuthorized) {
+      alert("You don't have permission to edit this post");
+      return;
+    }
+
     updatePost.mutate({
       id: postId,
       title,
       content,
       published,
       categoryIds: selectedCategories,
+      userId: session.user.id,
     });
   };
 
   const handleDelete = () => {
+    if (!session?.user?.id) {
+      router.push("/auth/signin");
+      return;
+    }
+
+    if (!isAuthorized) {
+      alert("You don't have permission to delete this post");
+      return;
+    }
+
     if (confirm("Are you sure you want to delete this post? This action cannot be undone.")) {
-      deletePost.mutate({ id: postId });
+      deletePost.mutate({ 
+        id: postId,
+        userId: session.user.id,
+      });
     }
   };
 
@@ -64,7 +112,7 @@ export default function EditPostPage() {
     );
   };
 
-  if (isLoading) {
+  if (status === "loading" || isLoading) {
     return (
       <div className="min-h-screen bg-gray-50">
         <Navbar />
@@ -85,6 +133,36 @@ export default function EditPostPage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 mt-20">
           <div className="text-center py-20 bg-white rounded-xl border shadow-sm">
             <h1 className="text-2xl font-bold text-gray-900 mb-4">Post Not Found</h1>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Unauthorized access
+  if (!isAuthorized) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Navbar />
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 mt-20">
+          <div className="text-center py-20 bg-white rounded-xl border-2 border-red-200 shadow-sm">
+            <div className="text-6xl mb-4">🚫</div>
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">Access Denied</h1>
+            <p className="text-gray-600 mb-6">You don't have permission to edit this post.</p>
+            <div className="flex gap-4 justify-center">
+              <button
+                onClick={() => router.push("/blog")}
+                className="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition-all"
+              >
+                Back to Blog
+              </button>
+              <button
+                onClick={() => router.push("/dashboard")}
+                className="px-6 py-3 bg-[#ff751f] text-white rounded-lg font-semibold hover:bg-[#e66a1a] transition-all"
+              >
+                My Dashboard
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -112,6 +190,7 @@ export default function EditPostPage() {
           onSubmit={handleSubmit}
           className="bg-white rounded-xl shadow-lg border p-8"
         >
+          {/* Title */}
           <div className="mb-6">
             <label htmlFor="title" className="block text-sm font-semibold text-gray-700 mb-2">
               Title
@@ -125,6 +204,8 @@ export default function EditPostPage() {
               required
             />
           </div>
+
+          {/* Content - Rich Text Editor */}
           <div className="mb-6">
             <label className="block text-sm font-semibold text-gray-700 mb-2">
               Content
@@ -134,6 +215,8 @@ export default function EditPostPage() {
               onChange={setContent}
             />
           </div>
+
+          {/* Categories */}
           {categories && categories.length > 0 && (
             <div className="mb-6">
               <label className="block text-sm font-semibold text-gray-700 mb-3">
@@ -159,6 +242,8 @@ export default function EditPostPage() {
               </div>
             </div>
           )}
+
+          {/* Published Status */}
           <div className="mb-8">
             <label className="flex items-center cursor-pointer">
               <input
@@ -170,6 +255,8 @@ export default function EditPostPage() {
               <span className="ml-3 text-sm font-medium text-gray-700">Published</span>
             </label>
           </div>
+
+          {/* Actions */}
           <div className="flex flex-wrap gap-4">
             <motion.button
               type="submit"

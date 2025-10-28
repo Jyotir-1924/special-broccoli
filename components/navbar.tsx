@@ -37,7 +37,7 @@ export function Navbar() {
       initial={hasAnimated ? false : { y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: hasAnimated ? 0 : 0.5 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm"
+      className="fixed top-0 left-0 right-0 z-50 bg-white/10 backdrop-blur-md border-b border-gray-200 shadow-sm"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
@@ -63,7 +63,7 @@ export function Navbar() {
               href="/blog"
               className="text-gray-700 hover:text-[#000000] px-4 py-2 rounded-lg text-base font-medium transition-all duration-200 hover:bg-[#ff751f]"
             >
-              Blog
+              Read Blogs
             </Link>
 
             {session && (
@@ -98,7 +98,7 @@ export function Navbar() {
                 >
                   <Link
                     href="/blog/new"
-                    className="inline-flex items-center px-6 py-2.5 bg-gradient-to-r from-[#ff751f] to-[#e66a1a] text-white text-base font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
+                    className="inline-flex items-center px-6 py-2.5 bg-linear-to-r from-[#ff751f] to-[#e66a1a] text-white text-base font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
                   >
                     <svg
                       className="w-5 h-5 mr-2"
@@ -132,7 +132,7 @@ export function Navbar() {
                         className="rounded-full"
                       />
                     ) : (
-                      <div className="w-10 h-10 bg-gradient-to-r from-[#ff751f] to-[#e66a1a] rounded-full flex items-center justify-center text-white font-semibold">
+                      <div className="w-10 h-10 bg-linear-to-r from-[#ff751f] to-[#e66a1a] rounded-full flex items-center justify-center text-white font-semibold">
                         {session.user?.name?.charAt(0).toUpperCase() || "U"}
                       </div>
                     )}
@@ -218,7 +218,7 @@ export function Navbar() {
                 </Link>
                 <Link
                   href="/auth/signup"
-                  className="inline-flex items-center px-6 py-2.5 bg-gradient-to-r from-[#ff751f] to-[#e66a1a] text-white text-base font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
+                  className="inline-flex items-center px-6 py-2.5 bg-linear-to-r from-[#ff751f] to-[#e66a1a] text-white text-base font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
                 >
                   Get Started
                 </Link>
@@ -295,7 +295,7 @@ export function Navbar() {
                     </Link>
                     <Link
                       href="/blog/new"
-                      className="bg-gradient-to-r from-[#ff751f] to-[#e66a1a] text-white px-4 py-3 rounded-lg text-base font-semibold hover:shadow-lg transition-all text-center"
+                      className="bg-linear-to-r from-[#ff751f] to-[#e66a1a] text-white px-4 py-3 rounded-lg text-base font-semibold hover:shadow-lg transition-all text-center"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       Write Post
@@ -321,7 +321,7 @@ export function Navbar() {
                     </Link>
                     <Link
                       href="/auth/signup"
-                      className="bg-gradient-to-r from-[#ff751f] to-[#e66a1a] text-white px-4 py-3 rounded-lg text-base font-semibold hover:shadow-lg transition-all text-center"
+                      className="bg-linear-to-r from-[#ff751f] to-[#e66a1a] text-white px-4 py-3 rounded-lg text-base font-semibold hover:shadow-lg transition-all text-center"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       Get Started

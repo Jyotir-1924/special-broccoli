@@ -1,9 +1,9 @@
-import { db } from "../../db";
-import { posts, postsToCategories } from "../../db/schema";
-import { users } from "../../db/schema";
-import { router, publicProcedure } from "../../trpc";
-import { eq, desc } from "drizzle-orm";
 import { z } from "zod";
+import { router, publicProcedure } from "../../trpc";
+import { db } from "../../db";
+import { posts, postsToCategories, users } from "../../db/schema";
+import { eq, desc } from "drizzle-orm";
+import { TRPCError } from "@trpc/server";
 
 // Helper function to generate slug
 function generateSlug(title: string): string {
@@ -187,69 +187,111 @@ export const postsRouter = router({
 
   // Update post
   update: publicProcedure
-    .input(
-      z.object({
-        id: z.number(),
-        title: z.string().min(1).optional(),
-        content: z.string().min(1).optional(),
-        published: z.boolean().optional(),
-        categoryIds: z.array(z.number()).optional(),
-      })
-    )
-    .mutation(async ({ input }) => {
-      const { id, categoryIds, ...updateData } = input;
+  .input(
+    z.object({
+      id: z.number(),
+      title: z.string().min(1).optional(),
+      content: z.string().min(1).optional(),
+      published: z.boolean().optional(),
+      categoryIds: z.array(z.number()).optional(),
+      userId: z.string(), // Add this - the current user's ID
+    })
+  )
+  .mutation(async ({ input }) => {
+    const { id, categoryIds, userId, ...updateData } = input;
 
-      // Generate new slug if title is being updated
-      if (updateData.title) {
-        const slug = generateSlug(updateData.title);
-        (updateData as any).slug = slug;
+    // Check if post exists and get its author
+    const existingPost = await db
+      .select()
+      .from(posts)
+      .where(eq(posts.id, id))
+      .limit(1);
+
+    if (existingPost.length === 0) {
+      throw new TRPCError({
+        code: "NOT_FOUND",
+        message: "Post not found",
+      });
+    }
+
+    // Check if the user is the author
+    if (existingPost[0].authorId !== userId) {
+      throw new TRPCError({
+        code: "FORBIDDEN",
+        message: "You don't have permission to edit this post",
+      });
+    }
+
+    // Generate new slug if title is being updated
+    if (updateData.title) {
+      const slug = generateSlug(updateData.title);
+      (updateData as any).slug = slug;
+    }
+
+    // Update post
+    const updatedPost = await db
+      .update(posts)
+      .set({ ...updateData, updatedAt: new Date() })
+      .where(eq(posts.id, id))
+      .returning();
+
+    // Update categories if provided
+    if (categoryIds !== undefined) {
+      // Remove existing categories
+      await db
+        .delete(postsToCategories)
+        .where(eq(postsToCategories.postId, id));
+
+      // Add new categories
+      if (categoryIds.length > 0) {
+        await db.insert(postsToCategories).values(
+          categoryIds.map((categoryId) => ({
+            postId: id,
+            categoryId,
+          }))
+        );
       }
+    }
 
-      // Update post
-      const updatedPost = await db
-        .update(posts)
-        .set({ ...updateData, updatedAt: new Date() })
-        .where(eq(posts.id, id))
-        .returning();
-
-      if (updatedPost.length === 0) {
-        throw new Error("Post not found");
-      }
-
-      // Update categories if provided
-      if (categoryIds !== undefined) {
-        // Remove existing categories
-        await db
-          .delete(postsToCategories)
-          .where(eq(postsToCategories.postId, id));
-
-        // Add new categories
-        if (categoryIds.length > 0) {
-          await db.insert(postsToCategories).values(
-            categoryIds.map((categoryId) => ({
-              postId: id,
-              categoryId,
-            }))
-          );
-        }
-      }
-
-      return updatedPost[0];
-    }),
+    return updatedPost[0];
+  }),
 
   // Delete post
-  delete: publicProcedure
-    .input(z.object({ id: z.number() }))
-    .mutation(async ({ input }) => {
-      const deletedPost = await db
-        .delete(posts)
-        .where(eq(posts.id, input.id))
-        .returning();
+delete: publicProcedure
+  .input(
+    z.object({
+      id: z.number(),
+      userId: z.string(), // Add this
+    })
+  )
+  .mutation(async ({ input }) => {
+    // Check if post exists and get its author
+    const existingPost = await db
+      .select()
+      .from(posts)
+      .where(eq(posts.id, input.id))
+      .limit(1);
 
-      if (deletedPost.length === 0) {
-        throw new Error("Post not found");
-      }
+    if (existingPost.length === 0) {
+      throw new TRPCError({
+        code: "NOT_FOUND",
+        message: "Post not found",
+      });
+    }
 
-      return { success: true };
-    }),
+    // Check if the user is the author
+    if (existingPost[0].authorId !== input.userId) {
+      throw new TRPCError({
+        code: "FORBIDDEN",
+        message: "You don't have permission to delete this post",
+      });
+    }
+
+    const deletedPost = await db
+      .delete(posts)
+      .where(eq(posts.id, input.id))
+      .returning();
+
+    return { success: true };
+  }),
 });

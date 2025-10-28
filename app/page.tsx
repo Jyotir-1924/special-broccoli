@@ -217,7 +217,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-32 bg-linear-to-br from-[#ff751f] to-[#000000] relative overflow-hidden">
+      <section className="py-32 bg-linear-to-tr from-[#ff751f] to-[#8f3700] relative overflow-hidden">
         <div className="container relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -260,7 +260,7 @@ export default function Home() {
       <footer className="bg-black text-white py-16">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-            <div className="col-span-1 ml-4 md:col-span-2">
+            <div className="col-span-1 mx-4 md:col-span-2 ">
               <Image
                 src="/assets/images/BSlogo.png"
                 alt="Blogsmith Logo"
@@ -268,7 +268,7 @@ export default function Home() {
                 height={80}
                 priority
               />
-              <p className="text-gray-400 mb-6 max-w-md text-xl">
+              <p className="text-gray-400 mb-6 max-w-md md:text-xl sm:text-xs text-justify ">
                 A modern blogging platform built for writers who care about
                 their craft. Create, publish, and share your stories with ease.
               </p>
@@ -303,7 +303,7 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-4">Technology</h4>
+              <h4 className="font-semibold mb-4">Tech Stack</h4>
               <ul className="space-y-2 text-gray-400 text-sm">
                 <li>Next.js 15</li>
                 <li>TypeScript</li>
