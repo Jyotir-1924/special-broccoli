@@ -1,8 +1,9 @@
-import { z } from "zod";
-import { router, publicProcedure } from "../../trpc";
 import { db } from "../../db";
 import { posts, postsToCategories } from "../../db/schema";
+import { users } from "../../db/schema";
+import { router, publicProcedure } from "../../trpc";
 import { eq, desc } from "drizzle-orm";
+import { z } from "zod";
 
 // Helper function to generate slug
 function generateSlug(title: string): string {
@@ -16,14 +17,35 @@ export const postsRouter = router({
   // Get all posts
   getAll: publicProcedure
     .input(
-      z.object({
-        published: z.boolean().optional(),
-        categoryId: z.number().optional(),
-      }).optional()
+      z
+        .object({
+          published: z.boolean().optional(),
+          categoryId: z.number().optional(),
+        })
+        .optional()
     )
     .query(async ({ input }) => {
-      let query = db.select().from(posts).orderBy(desc(posts.createdAt));
-      
+      let query = db
+        .select({
+          id: posts.id,
+          title: posts.title,
+          content: posts.content,
+          slug: posts.slug,
+          published: posts.published,
+          authorId: posts.authorId,
+          createdAt: posts.createdAt,
+          updatedAt: posts.updatedAt,
+          author: {
+            id: users.id,
+            name: users.name,
+            email: users.email,
+            image: users.image,
+          },
+        })
+        .from(posts)
+        .leftJoin(users, eq(posts.authorId, users.id))
+        .orderBy(desc(posts.createdAt));
+
       if (input?.published !== undefined) {
         query = query.where(eq(posts.published, input.published)) as any;
       }
@@ -36,7 +58,7 @@ export const postsRouter = router({
           .select()
           .from(postsToCategories)
           .where(eq(postsToCategories.categoryId, input.categoryId));
-        
+
         const postIds = postCategories.map((pc) => pc.postId);
         return allPosts.filter((post) => postIds.includes(post.id));
       }
@@ -72,29 +94,45 @@ export const postsRouter = router({
 
   // Get post by slug
   getBySlug: publicProcedure
-    .input(z.object({ slug: z.string() }))
-    .query(async ({ input }) => {
-      const post = await db
-        .select()
-        .from(posts)
-        .where(eq(posts.slug, input.slug))
-        .limit(1);
+  .input(z.object({ slug: z.string() }))
+  .query(async ({ input }) => {
+    const post = await db
+      .select({
+        id: posts.id,
+        title: posts.title,
+        content: posts.content,
+        slug: posts.slug,
+        published: posts.published,
+        authorId: posts.authorId,
+        createdAt: posts.createdAt,
+        updatedAt: posts.updatedAt,
+        author: {
+          id: users.id,
+          name: users.name,
+          email: users.email,
+          image: users.image,
+        },
+      })
+      .from(posts)
+      .leftJoin(users, eq(posts.authorId, users.id))
+      .where(eq(posts.slug, input.slug))
+      .limit(1);
 
-      if (post.length === 0) {
-        throw new Error("Post not found");
-      }
+    if (post.length === 0) {
+      throw new Error("Post not found");
+    }
 
-      // Get categories for this post
-      const postCategories = await db
-        .select()
-        .from(postsToCategories)
-        .where(eq(postsToCategories.postId, post[0].id));
+    // Get categories for this post
+    const postCategories = await db
+      .select()
+      .from(postsToCategories)
+      .where(eq(postsToCategories.postId, post[0].id));
 
-      return {
-        ...post[0],
-        categoryIds: postCategories.map((pc) => pc.categoryId),
-      };
-    }),
+    return {
+      ...post[0],
+      categoryIds: postCategories.map((pc) => pc.categoryId),
+    };
+  }),
 
   // Create post
   create: publicProcedure
@@ -104,6 +142,7 @@ export const postsRouter = router({
         content: z.string().min(1, "Content is required"),
         published: z.boolean().default(false),
         categoryIds: z.array(z.number()).optional(),
+        authorId: z.string().optional(), // Add this
       })
     )
     .mutation(async ({ input }) => {
@@ -128,6 +167,7 @@ export const postsRouter = router({
           content: input.content,
           slug,
           published: input.published,
+          authorId: input.authorId, // Add this
           updatedAt: new Date(),
         })
         .returning();

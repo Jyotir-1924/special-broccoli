@@ -4,6 +4,7 @@ import { Navbar } from "@/components/navbar";
 import { RichTextEditor } from "@/components/rich-text-editor";
 import { trpc } from "@/lib/trpc";
 import { motion } from "framer-motion";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -13,8 +14,15 @@ export default function NewPostPage() {
   const [content, setContent] = useState("");
   const [published, setPublished] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push("/auth/signin");
+    },
+  });
 
   const { data: categories } = trpc.categories.getAll.useQuery();
+
   const createPost = trpc.posts.create.useMutation({
     onSuccess: (data) => {
       router.push(`/blog/post/${data.slug}`);
@@ -23,11 +31,17 @@ export default function NewPostPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!session?.user?.id) {
+      router.push("/auth/signin");
+      return;
+    }
+
     createPost.mutate({
       title,
       content,
       published,
       categoryIds: selectedCategories,
+      authorId: session.user.id,
     });
   };
 

@@ -5,6 +5,7 @@ import { trpc } from "@/lib/trpc";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import Image from "next/image";
 
 export default function BlogPostPage() {
   const params = useParams();
@@ -97,7 +98,36 @@ export default function BlogPostPage() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="bg-white rounded-xl shadow-lg border p-8 md:p-12 mt-6"
         >
+          {/* Header */}
           <header className="mb-8 border-b pb-6">
+            {/* Author Info */}
+            {post.author && (
+              <Link
+                href={`/author/${post.author.id}`}
+                className="flex items-center gap-3 mb-6 group w-fit"
+              >
+                {post.author.image ? (
+                  <Image
+                    src={post.author.image}
+                    alt={post.author.name || "Author"}
+                    width={48}
+                    height={48}
+                    className="rounded-full"
+                  />
+                ) : (
+                  <div className="w-12 h-12 bg-linear-to-r from-[#ff751f] to-[#e66a1a] rounded-full flex items-center justify-center text-white font-semibold text-lg">
+                    {post.author.name?.charAt(0).toUpperCase() || "A"}
+                  </div>
+                )}
+                <div>
+                  <p className="text-sm font-semibold text-gray-900 group-hover:text-[#ff751f] transition-colors">
+                    {post.author.name || "Anonymous"}
+                  </p>
+                  <p className="text-xs text-gray-500">Author</p>
+                </div>
+              </Link>
+            )}
+
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
               {post.title}
             </h1>

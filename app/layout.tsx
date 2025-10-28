@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Manrope, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { TRPCProvider } from "@/lib/trpc-provider";
+import { AuthProvider } from "@/components/session-provider";
 
-const manrope = Manrope({
-  variable: "--font-manrope",
+const geistSans = Geist({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"], // optional
 });
 
 const geistMono = Geist_Mono({
@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Blogsmith",
-  description: "A multi-user blogging platform !!",
+  title: "Blogsmith - Modern Blogging Platform",
+  description: "A modern blogging platform built for writers",
 };
 
 export default function RootLayout({
@@ -25,9 +25,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${manrope.variable} ${geistMono.variable} antialiased`}>
-        <TRPCProvider>{children}</TRPCProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning
+      >
+        <AuthProvider>
+          <TRPCProvider>{children}</TRPCProvider>
+        </AuthProvider>
       </body>
     </html>
   );
