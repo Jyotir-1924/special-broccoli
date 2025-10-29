@@ -49,7 +49,7 @@ export default function ProfilePage() {
 
   if (status === "loading") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100">
         <Navbar />
         <div className="flex items-center justify-center min-h-screen">
           <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-[#ff751f]"></div>
@@ -59,7 +59,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100">
       <Navbar />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-32">
@@ -71,11 +71,8 @@ export default function ProfilePage() {
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
             Your Profile
           </h1>
-
-          {/* Profile Card */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
-            {/* Header with Avatar */}
-            <div className="bg-gradient-to-r from-[#ff751f] to-[#e66a1a] px-8 py-12">
+            <div className="bg-linear-to-r from-[#ff751f] to-[#e66a1a] px-8 py-12">
               <div className="flex items-center gap-6">
                 {session?.user?.image ? (
                   <Image
@@ -96,8 +93,6 @@ export default function ProfilePage() {
                 </div>
               </div>
             </div>
-
-            {/* Profile Content */}
             <div className="p-8">
               {message && (
                 <motion.div
@@ -114,7 +109,6 @@ export default function ProfilePage() {
               )}
 
               <div className="space-y-6">
-                {/* Name */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
                     Display Name
@@ -124,15 +118,13 @@ export default function ProfilePage() {
                       type="text"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff751f] focus:border-transparent transition-all"
+                      className="text-black w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff751f] focus:border-transparent transition-all"
                       placeholder="Your name"
                     />
                   ) : (
                     <p className="text-lg text-gray-900">{session?.user?.name || "Not set"}</p>
                   )}
                 </div>
-
-                {/* Email (Read-only) */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
                     Email Address
@@ -140,8 +132,6 @@ export default function ProfilePage() {
                   <p className="text-lg text-gray-900">{session?.user?.email}</p>
                   <p className="text-xs text-gray-500 mt-1">Email cannot be changed</p>
                 </div>
-
-                {/* Bio */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
                     Bio
@@ -151,7 +141,7 @@ export default function ProfilePage() {
                       value={bio}
                       onChange={(e) => setBio(e.target.value)}
                       rows={4}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff751f] focus:border-transparent transition-all"
+                      className="text-gray-700 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff751f] focus:border-transparent transition-all"
                       placeholder="Tell us about yourself..."
                     />
                   ) : (
@@ -168,7 +158,7 @@ export default function ProfilePage() {
                         whileTap={{ scale: 0.98 }}
                         onClick={handleSave}
                         disabled={isSaving}
-                        className="px-6 py-3 bg-gradient-to-r from-[#ff751f] to-[#e66a1a] text-white rounded-lg font-semibold hover:shadow-lg transition-all disabled:opacity-50"
+                        className="px-6 py-3 bg-linear-to-r from-[#ff751f] to-[#e66a1a] text-white rounded-lg font-semibold hover:shadow-lg transition-all disabled:opacity-50"
                       >
                         {isSaving ? "Saving..." : "Save Changes"}
                       </motion.button>
@@ -190,7 +180,7 @@ export default function ProfilePage() {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => setIsEditing(true)}
-                      className="px-6 py-3 bg-gradient-to-r from-[#ff751f] to-[#e66a1a] text-white rounded-lg font-semibold hover:shadow-lg transition-all"
+                      className="px-6 py-3 bg-linear-to-r from-[#ff751f] to-[#e66a1a] text-white rounded-lg font-semibold hover:shadow-lg transition-all"
                     >
                       Edit Profile
                     </motion.button>
@@ -199,8 +189,6 @@ export default function ProfilePage() {
               </div>
             </div>
           </div>
-
-          {/* Account Stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
             <motion.div
               whileHover={{ y: -5 }}

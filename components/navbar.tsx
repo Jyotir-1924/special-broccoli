@@ -1,17 +1,15 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
-import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSession, signOut } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
+import { useState, useEffect } from "react";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const { data: session, status } = useSession();
-
-  // Read sessionStorage synchronously on initialization
   const [hasAnimated, setHasAnimated] = useState(() => {
     try {
       return sessionStorage.getItem("navbarAnimated") === "true";
@@ -19,8 +17,6 @@ export function Navbar() {
       return false;
     }
   });
-
-  // Mark animation as run for the rest of the session
   useEffect(() => {
     if (!hasAnimated) {
       try {
@@ -41,7 +37,6 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400 }}
@@ -56,8 +51,6 @@ export function Navbar() {
               />
             </Link>
           </motion.div>
-
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
             <Link
               href="/blog"
@@ -82,15 +75,12 @@ export function Navbar() {
                 </Link>
               </>
             )}
-
-            {/* Auth Buttons / User Menu */}
             {status === "loading" ? (
               <div className="ml-4 px-6 py-2.5 bg-gray-200 rounded-lg animate-pulse">
                 <div className="h-5 w-20 bg-gray-300 rounded"></div>
               </div>
             ) : session ? (
               <>
-                {/* Write Post Button */}
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -116,8 +106,6 @@ export function Navbar() {
                     Write Post
                   </Link>
                 </motion.div>
-
-                {/* User Menu */}
                 <div className="relative ml-3">
                   <button
                     onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
@@ -137,7 +125,9 @@ export function Navbar() {
                       </div>
                     )}
                     <svg
-                      className="w-4 h-4 text-gray-600"
+                      className={`w-4 h-4 text-gray-600 transform transition-transform duration-200 ${
+                        isUserMenuOpen ? "rotate-180" : "rotate-0"
+                      }`}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -150,8 +140,6 @@ export function Navbar() {
                       />
                     </svg>
                   </button>
-
-                  {/* Dropdown Menu */}
                   <AnimatePresence>
                     {isUserMenuOpen && (
                       <motion.div
@@ -161,7 +149,7 @@ export function Navbar() {
                         transition={{ duration: 0.2 }}
                         className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden"
                       >
-                        <div className="px-4 py-3 border-b border-gray-100">
+                        <div className="px-4 py-3 border-b border-gray-300">
                           <p className="text-sm font-semibold text-gray-900">
                             {session.user?.name}
                           </p>
@@ -184,15 +172,16 @@ export function Navbar() {
                           >
                             My Posts
                           </Link>
+                          {/* To update the Settings page
                           <Link
                             href="/settings"
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
                             onClick={() => setIsUserMenuOpen(false)}
                           >
                             Settings
-                          </Link>
+                          </Link> */}
                         </div>
-                        <div className="border-t border-gray-100">
+                        <div className="border-t border-gray-300">
                           <button
                             onClick={() => {
                               setIsUserMenuOpen(false);
@@ -225,8 +214,6 @@ export function Navbar() {
               </div>
             )}
           </div>
-
-          {/* Mobile menu button */}
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -250,8 +237,6 @@ export function Navbar() {
             </button>
           </div>
         </div>
-
-        {/* Mobile Navigation Menu */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div

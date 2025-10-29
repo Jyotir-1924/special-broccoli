@@ -85,7 +85,7 @@ export default function CategoriesPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           onSubmit={handleSubmit}
-          className="bg-white rounded-xl shadow-md border p-6 mb-8"
+          className="bg-white rounded-xl shadow-md border p-6 mb-8 text-gray-600"
         >
           <h2 className="text-xl font-semibold mb-4 text-black">
             {editingId ? "Edit Category" : "Create New Category"}
@@ -96,7 +96,7 @@ export default function CategoriesPage() {
               htmlFor="name"
               className="block text-sm font-semibold text-gray-700 mb-2"
             >
-              Name
+              Category Name
             </label>
             <input
               type="text"
@@ -179,9 +179,6 @@ export default function CategoriesPage() {
                   {categories.map((category) => (
                     <motion.tr
                       key={category.id}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      whileHover={{ backgroundColor: "#f9fafb" }}
                     >
                       <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">
                         {category.name}
@@ -192,7 +189,7 @@ export default function CategoriesPage() {
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <button
                           onClick={() => handleEdit(category)}
-                          className="text-blue-600 hover:text-blue-900 mr-4 transition-colors"
+                          className="text-blue-600 hover:text-blue-900 mr-4 transition-colors font-bold"
                         >
                           Edit
                         </button>
@@ -200,7 +197,7 @@ export default function CategoriesPage() {
                           onClick={() =>
                             handleDelete(category.id, category.name)
                           }
-                          className="text-red-600 hover:text-red-900 transition-colors"
+                          className="text-red-600 hover:text-red-900 transition-colors font-bold"
                         >
                           Delete
                         </button>
