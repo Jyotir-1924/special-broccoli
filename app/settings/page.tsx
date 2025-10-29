@@ -140,7 +140,7 @@ export default function SettingsPage() {
           <div className="pt-4 border-t border-gray-200">
             <button
               type="submit"
-              className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-[#ff751f] to-[#e66a1a] text-white rounded-lg font-semibold shadow hover:shadow-lg transition-all"
+              className="w-full sm:w-auto px-6 py-3 bg-linear-to-r from-[#ff751f] to-[#e66a1a] text-white rounded-lg font-semibold shadow hover:shadow-lg transition-all"
             >
               Save Changes
             </button>
