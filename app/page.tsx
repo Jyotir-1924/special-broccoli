@@ -302,7 +302,35 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-            <p>© 2025 Blogsmith. Built with passion for writers everywhere.</p>
+            <p>
+              © 2025 <span className="text-white font-semibold">Blogsmith</span>
+              . Built with passion ☕ and ❤️ for writers everywhere.
+            </p>
+            <p className="mt-2">
+              <span className="text-gray-500">Created by</span>{" "}
+              <span className="text-white font-medium">
+                Jyotiraditya Gautam
+              </span>{" "}
+              (
+              <a
+                href="https://www.linkedin.com/in/jyotiraditya-gautam/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-400 hover:text-blue-300 underline"
+              >
+                LinkedIn
+              </a>
+              {"  |  "}
+              <a
+                href="https://github.com/Jyotir-1924"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-400 hover:text-blue-300 underline"
+              >
+                GitHub
+              </a>
+              )
+            </p>
           </div>
         </div>
       </footer>

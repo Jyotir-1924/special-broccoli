@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
     domains: [],
     unoptimized: false,
   },
+  devIndicators: false,
 };
 
 export default nextConfig;
