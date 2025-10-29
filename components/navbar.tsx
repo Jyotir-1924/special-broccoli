@@ -58,7 +58,6 @@ export function Navbar() {
             >
               Read Blogs
             </Link>
-
             {session && (
               <>
                 <Link
@@ -172,7 +171,7 @@ export function Navbar() {
                           >
                             My Posts
                           </Link>
-                          {}
+                          
                         </div>
                         <div className="border-t border-gray-300">
                           <button
@@ -247,7 +246,6 @@ export function Navbar() {
                 >
                   Blog
                 </Link>
-
                 {session ? (
                   <>
                     <Link

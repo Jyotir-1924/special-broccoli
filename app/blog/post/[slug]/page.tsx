@@ -94,16 +94,13 @@ export default function BlogPostPage() {
             Back to Blog
           </Link>
         </motion.div>
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           className="bg-white rounded-xl shadow-lg border p-8 md:p-12 mt-6"
         >
-          {}
           <header className="mb-8 border-b pb-6">
-            {}
             {post.author && (
               <Link
                 href={`/author/${post.author.id}`}
@@ -130,7 +127,6 @@ export default function BlogPostPage() {
                 </div>
               </Link>
             )}
-
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
               {post.title}
             </h1>
@@ -161,9 +157,7 @@ export default function BlogPostPage() {
               )}
             </div>
           </header>
-
           <AISummary content={post.content} />
-
           <div
             className="max-w-none text-black leading-relaxed
             [&_ul]:list-disc [&_ul]:ml-8 [&_ul]:my-4

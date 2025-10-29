@@ -36,7 +36,6 @@ export function BlogCard({ id, title, content, slug, published, createdAt, autho
       whileHover={{ y: -5, transition: { duration: 0.2 } }}
       className="bg-white rounded-xl shadow-md border border-gray-200 p-6 hover:shadow-xl transition-all duration-300"
     >
-      {}
       {author && (
         <Link href={`/author/${author.id}`} className="flex items-center gap-3 mb-4 group">
           {author.image ? (
@@ -60,7 +59,6 @@ export function BlogCard({ id, title, content, slug, published, createdAt, autho
           </div>
         </Link>
       )}
-
       <div className="flex justify-between items-start mb-3">
         <h2 className="text-2xl font-bold text-gray-900 hover:text-[#ff751f] transition-colors">
           <Link href={`/blog/post/${slug}`}>{title}</Link>

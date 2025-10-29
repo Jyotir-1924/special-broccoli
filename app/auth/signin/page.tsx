@@ -13,7 +13,6 @@ export default function SignInPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
   const handleCredentialsSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -51,7 +50,6 @@ export default function SignInPage() {
         transition={{ duration: 0.5 }}
         className="max-w-md w-full"
       >
-        {}
         <div className="text-center mb-8">
           <Link href="/" className="inline-block">
             <Image
@@ -64,10 +62,7 @@ export default function SignInPage() {
           </Link>
           <p className="mt-2 text-gray-600">Sign in to your account</p>
         </div>
-
-        {}
         <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-200">
-          {}
           <button
             onClick={handleGoogleSignIn}
             className="w-full flex items-center justify-center gap-3 px-4 py-3 border-2 border-gray-300 rounded-xl hover:bg-black hover:text-[#ff751f] transition-all duration-200 font-medium text-black"
@@ -79,8 +74,6 @@ export default function SignInPage() {
             />
             Continue with Google
           </button>
-
-          {}
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-300"></div>
@@ -91,15 +84,12 @@ export default function SignInPage() {
               </span>
             </div>
           </div>
-
-          {}
           <form onSubmit={handleCredentialsSignIn} className="space-y-4">
             {error && (
               <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
                 {error}
               </div>
             )}
-
             <div>
               <label
                 htmlFor="email"
@@ -117,7 +107,6 @@ export default function SignInPage() {
                 placeholder="john@doe.com"
               />
             </div>
-
             <div>
               <label
                 htmlFor="password"
@@ -144,8 +133,6 @@ export default function SignInPage() {
               {isLoading ? "Signing in..." : "Sign In"}
             </button>
           </form>
-
-          {}
           <p className="mt-6 text-center text-sm text-gray-600">
             Don't have an account?{" "}
             <Link
@@ -156,8 +143,6 @@ export default function SignInPage() {
             </Link>
           </p>
         </div>
-
-        {}
         <div className="mt-6 text-center">
           <Link href="/" className="text-gray-600 hover:text-gray-900 text-sm">
             ← Back to home

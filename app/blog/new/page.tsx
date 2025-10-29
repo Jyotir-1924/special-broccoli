@@ -56,7 +56,6 @@ export default function NewPostPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 mt-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -70,7 +69,6 @@ export default function NewPostPage() {
             Share your thoughts with the world
           </p>
         </motion.div>
-
         <motion.form
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -170,7 +168,6 @@ export default function NewPostPage() {
               Cancel
             </motion.button>
           </div>
-
           {createPost.error && (
             <motion.p
               initial={{ opacity: 0 }}

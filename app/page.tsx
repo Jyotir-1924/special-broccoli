@@ -21,7 +21,6 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100">
       <Navbar />
-
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
@@ -35,7 +34,6 @@ export default function Home() {
             className="absolute -bottom-1/2 -left-1/2 w-full h-full bg-linear-to-tr from-black/5 to-transparent rounded-full blur-3xl"
           />
         </div>
-
         <div className="container relative z-10 text-center py-32">
           <motion.div
             initial="initial"
@@ -47,7 +45,6 @@ export default function Home() {
                 ✨ Welcome to the Future of Blogging
               </span>
             </motion.div>
-
             <motion.h1
               variants={fadeInUp}
               className="text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight"
@@ -58,7 +55,6 @@ export default function Home() {
               <br />
               <span className="text-gray-900">with the World</span>
             </motion.h1>
-
             <motion.p
               variants={fadeInUp}
               className="text-xl sm:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed"
@@ -67,7 +63,6 @@ export default function Home() {
               <br className="hidden sm:block" />
               Join thousands of writers sharing their passion.
             </motion.p>
-
             <motion.div
               variants={fadeInUp}
               className="flex flex-col sm:flex-row gap-4 justify-center items-center"
@@ -96,7 +91,6 @@ export default function Home() {
                   </svg>
                 </Link>
               </motion.div>
-
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -122,7 +116,6 @@ export default function Home() {
                 </Link>
               </motion.div>
             </motion.div>
-
             <motion.div
               variants={fadeInUp}
               className="mt-20 grid grid-cols-3 gap-8 max-w-2xl mx-auto"
@@ -142,7 +135,6 @@ export default function Home() {
             </motion.div>
           </motion.div>
         </div>
-
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
@@ -153,7 +145,6 @@ export default function Home() {
           </div>
         </motion.div>
       </section>
-
       <section className="py-32 bg-white">
         <div className="container text-center">
           <motion.div
@@ -170,7 +161,6 @@ export default function Home() {
               Everything you need to create, publish, and grow your blog
             </p>
           </motion.div>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
@@ -216,7 +206,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       <section className="py-32 bg-linear-to-tr from-[#ff751f] to-[#8f3700] relative overflow-hidden">
         <div className="container relative z-10 text-center">
           <motion.div
@@ -256,7 +245,6 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
-
       <footer className="bg-black text-white py-16">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">

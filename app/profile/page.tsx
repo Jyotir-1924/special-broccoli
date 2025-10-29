@@ -61,7 +61,6 @@ export default function ProfilePage() {
   return (
     <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100">
       <Navbar />
-
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-32">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -107,7 +106,6 @@ export default function ProfilePage() {
                   {message}
                 </motion.div>
               )}
-
               <div className="space-y-6">
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -148,8 +146,6 @@ export default function ProfilePage() {
                     <p className="text-lg text-gray-900">{bio || "No bio yet"}</p>
                   )}
                 </div>
-
-                {}
                 <div className="flex gap-4 pt-4">
                   {isEditing ? (
                     <>

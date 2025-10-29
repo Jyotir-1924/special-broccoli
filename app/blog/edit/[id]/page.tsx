@@ -53,8 +53,6 @@ export default function EditPostPage() {
       setContent(post.content);
       setPublished(post.published);
       setSelectedCategories(post.categoryIds || []);
-
-      
       if (post.authorId === session.user.id) {
         setIsAuthorized(true);
       } else {
@@ -172,7 +170,6 @@ export default function EditPostPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 mt-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -182,7 +179,6 @@ export default function EditPostPage() {
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">Edit Post</h1>
           <p className="text-gray-600 mb-8">Update your blog post</p>
         </motion.div>
-
         <motion.form
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -190,7 +186,6 @@ export default function EditPostPage() {
           onSubmit={handleSubmit}
           className="bg-white rounded-xl shadow-lg border p-8"
         >
-          {}
           <div className="mb-6">
             <label htmlFor="title" className="block text-sm font-semibold text-gray-700 mb-2">
               Title
@@ -204,8 +199,6 @@ export default function EditPostPage() {
               required
             />
           </div>
-
-          {}
           <div className="mb-6">
             <label className="block text-sm font-semibold text-gray-700 mb-2">
               Content
@@ -215,8 +208,6 @@ export default function EditPostPage() {
               onChange={setContent}
             />
           </div>
-
-          {}
           {categories && categories.length > 0 && (
             <div className="mb-6">
               <label className="block text-sm font-semibold text-gray-700 mb-3">
@@ -242,8 +233,6 @@ export default function EditPostPage() {
               </div>
             </div>
           )}
-
-          {}
           <div className="mb-8">
             <label className="flex items-center cursor-pointer">
               <input
@@ -255,8 +244,6 @@ export default function EditPostPage() {
               <span className="ml-3 text-sm font-medium text-gray-700">Published</span>
             </label>
           </div>
-
-          {}
           <div className="flex flex-wrap gap-4">
             <motion.button
               type="submit"
@@ -287,7 +274,6 @@ export default function EditPostPage() {
               {deletePost.isPending ? "Deleting..." : "Delete Post"}
             </motion.button>
           </div>
-
           {updatePost.error && (
             <motion.p
               initial={{ opacity: 0 }}

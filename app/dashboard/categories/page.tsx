@@ -65,7 +65,6 @@ export default function CategoriesPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 mt-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -79,7 +78,6 @@ export default function CategoriesPage() {
             Organize your blog posts with categories
           </p>
         </motion.div>
-
         <motion.form
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -108,7 +106,6 @@ export default function CategoriesPage() {
               required
             />
           </div>
-
           <div className="mb-6">
             <label
               htmlFor="description"
@@ -125,7 +122,6 @@ export default function CategoriesPage() {
               placeholder="Brief description of this category..."
             />
           </div>
-
           <div className="flex gap-4">
             <motion.button
               type="submit"
@@ -149,7 +145,6 @@ export default function CategoriesPage() {
             )}
           </div>
         </motion.form>
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

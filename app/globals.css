@@ -1,6 +1,4 @@
 @import "tailwindcss";
-
-/* Import Manrope from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap");
 
 :root {
@@ -18,10 +16,9 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: "Montserrat", Arial, Helvetica, sans-serif; /* Changed font */
+  font-family: "Montserrat", Arial, Helvetica, sans-serif;
 }
 
-/* Smooth animated gradient for hero section */
 @keyframes gradientMove {
   0% {
     background-position: 0% 50%;
@@ -39,7 +36,6 @@ body {
   animation: gradientMove 10s ease infinite;
 }
 
-/* Optional slow bounce animation */
 @keyframes bounce-slow {
   0%,
   100% {
@@ -54,7 +50,6 @@ body {
   animation: bounce-slow 3s infinite;
 }
 
-/* Subtle horizontal gradient animation (alternative) */
 @keyframes gradient-x {
   0%,
   100% {

@@ -49,9 +49,7 @@ export default function AuthorPage() {
   return (
     <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100">
       <Navbar />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-32">
-        {}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -86,13 +84,10 @@ export default function AuthorPage() {
             </div>
           </div>
         </motion.div>
-
-        {}
         <div>
           <h2 className="text-3xl font-bold text-gray-900 mb-8">
             Posts by {author.name}
           </h2>
-
           {postsLoading ? (
             <div className="flex justify-center py-20">
               <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-[#ff751f]"></div>

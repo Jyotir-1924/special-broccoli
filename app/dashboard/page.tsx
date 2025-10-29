@@ -16,7 +16,7 @@ export default function DashboardPage() {
     },
   });
 
-  const { data: allPosts, isLoading } = trpc.posts.getAll.useQuery({});
+  const { data: allPosts, isLoading } = trpc.posts.getAll.useQuery();
   const deletePost = trpc.posts.delete.useMutation({
     onSuccess: () => window.location.reload(),
     onError: (error) => alert(error.message),
@@ -59,7 +59,7 @@ export default function DashboardPage() {
       <Navbar />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 mt-20">
-        {}
+        
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -71,8 +71,6 @@ export default function DashboardPage() {
           </h1>
           <p className="text-gray-600 text-lg">Manage your blog posts</p>
         </motion.div>
-
-        {}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -111,8 +109,6 @@ export default function DashboardPage() {
             </p>
           </motion.div>
         </motion.div>
-
-        {}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -183,8 +179,6 @@ export default function DashboardPage() {
             </div>
           )}
         </motion.div>
-
-        {}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

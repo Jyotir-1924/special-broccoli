@@ -32,7 +32,6 @@ export default function SettingsPage() {
         transition={{ duration: 0.5 }}
         className="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-8 border border-gray-200"
       >
-        {}
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold text-gray-800">Account Settings</h1>
@@ -45,8 +44,6 @@ export default function SettingsPage() {
             Sign out
           </button>
         </div>
-
-        {}
         <form onSubmit={handleSave} className="space-y-8">
           <div>
             <h2 className="text-lg font-semibold text-gray-700 mb-4">Profile</h2>
@@ -77,8 +74,6 @@ export default function SettingsPage() {
               </div>
             </div>
           </div>
-
-          {}
           <div>
             <h2 className="text-lg font-semibold text-gray-700 mb-4">Appearance</h2>
             <div className="flex items-center gap-6">
@@ -106,8 +101,6 @@ export default function SettingsPage() {
               </label>
             </div>
           </div>
-
-          {}
           <div>
             <h2 className="text-lg font-semibold text-gray-700 mb-4">Security</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -135,8 +128,6 @@ export default function SettingsPage() {
               </div>
             </div>
           </div>
-
-          {}
           <div className="pt-4 border-t border-gray-200">
             <button
               type="submit"

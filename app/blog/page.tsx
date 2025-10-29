@@ -77,7 +77,6 @@ export default function BlogPage() {
             </div>
           </motion.div>
         )}
-
         {postsLoading ? (
           <div className="text-center py-20">
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-4 border-[#ff751f]"></div>
