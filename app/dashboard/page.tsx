@@ -22,7 +22,7 @@ export default function DashboardPage() {
     onError: (error) => alert(error.message),
   });
 
-  // Filter posts by current user
+  
   const userPosts =
     allPosts?.filter((post) => post.authorId === session?.user?.id) || [];
   const publishedPosts = userPosts.filter((post) => post.published);
@@ -59,7 +59,7 @@ export default function DashboardPage() {
       <Navbar />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 mt-20">
-        {/* Header */}
+        {}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -72,7 +72,7 @@ export default function DashboardPage() {
           <p className="text-gray-600 text-lg">Manage your blog posts</p>
         </motion.div>
 
-        {/* Stats */}
+        {}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -112,7 +112,7 @@ export default function DashboardPage() {
           </motion.div>
         </motion.div>
 
-        {/* Published Posts */}
+        {}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -184,7 +184,7 @@ export default function DashboardPage() {
           )}
         </motion.div>
 
-        {/* Draft Posts */}
+        {}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

@@ -51,7 +51,7 @@ export default function AuthorPage() {
       <Navbar />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-32">
-        {/* Author Header */}
+        {}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -87,7 +87,7 @@ export default function AuthorPage() {
           </div>
         </motion.div>
 
-        {/* Author's Posts */}
+        {}
         <div>
           <h2 className="text-3xl font-bold text-gray-900 mb-8">
             Posts by {author.name}

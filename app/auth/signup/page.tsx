@@ -48,7 +48,7 @@ export default function SignUpPage() {
         return;
       }
 
-      // Auto sign in after registration
+      
       await signIn("credentials", {
         email,
         password,
@@ -75,7 +75,7 @@ export default function SignUpPage() {
         transition={{ duration: 0.5 }}
         className="max-w-md w-full"
       >
-        {/* Logo */}
+        {}
         <div className="text-center mb-8">
           <Link href="/" className="inline-block">
             <Image
@@ -89,9 +89,9 @@ export default function SignUpPage() {
           <p className="mt-2 text-gray-600">Create your account</p>
         </div>
 
-        {/* Sign Up Card */}
+        {}
         <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-200">
-          {/* Google Sign In */}
+          {}
           <button
             onClick={handleGoogleSignIn}
             className="w-full flex items-center justify-center gap-3 px-4 py-3 border-2 border-gray-300 rounded-xl hover:bg-black hover:text-[#ff751f] transition-all duration-200 font-medium text-black"
@@ -104,7 +104,7 @@ export default function SignUpPage() {
             Continue with Google
           </button>
 
-          {/* Divider */}
+          {}
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-300"></div>
@@ -116,7 +116,7 @@ export default function SignUpPage() {
             </div>
           </div>
 
-          {/* Sign Up Form */}
+          {}
           <form onSubmit={handleSignUp} className="space-y-4">
             {error && (
               <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
@@ -209,7 +209,7 @@ export default function SignUpPage() {
             </button>
           </form>
 
-          {/* Sign In Link */}
+          {}
           <p className="mt-6 text-center text-sm text-gray-600">
             Already have an account?{" "}
             <Link
@@ -221,7 +221,7 @@ export default function SignUpPage() {
           </p>
         </div>
 
-        {/* Back to Home */}
+        {}
         <div className="mt-6 text-center">
           <Link href="/" className="text-gray-600 hover:text-gray-900 text-sm">
             ← Back to home

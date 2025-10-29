@@ -16,10 +16,10 @@ export async function POST(req: Request) {
       );
     }
 
-    // Strip HTML tags from content
+    
     const plainText = content.replace(/<[^>]*>/g, '');
 
-    // Create streaming response
+    
     const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [
@@ -37,7 +37,7 @@ export async function POST(req: Request) {
       stream: true,
     });
 
-    // Create a ReadableStream for streaming the response
+    
     const encoder = new TextEncoder();
     const stream = new ReadableStream({
       async start(controller) {

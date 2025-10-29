@@ -2,7 +2,7 @@ import { pgTable, serial, text, varchar, boolean, timestamp, integer, primaryKey
 import { relations } from "drizzle-orm";
 import type { AdapterAccount } from "next-auth/adapters";
 
-// Users table (NextAuth)
+
 export const users = pgTable("user", {
   id: text("id")
     .primaryKey()
@@ -11,7 +11,7 @@ export const users = pgTable("user", {
   email: text("email").notNull().unique(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
-  password: text("password"), // For email/password auth
+  password: text("password"), 
   bio: text("bio"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
@@ -60,19 +60,19 @@ export const verificationTokens = pgTable(
   })
 );
 
-// Posts table (updated with authorId)
+
 export const posts = pgTable("posts", {
   id: serial("id").primaryKey(),
   title: varchar("title", { length: 255 }).notNull(),
   content: text("content").notNull(),
   slug: varchar("slug", { length: 255 }).notNull().unique(),
   published: boolean("published").default(false).notNull(),
-  authorId: text("author_id").references(() => users.id, { onDelete: "cascade" }), // NEW
+  authorId: text("author_id").references(() => users.id, { onDelete: "cascade" }), 
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
-// Categories table
+
 export const categories = pgTable("categories", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 100 }).notNull(),
@@ -81,13 +81,13 @@ export const categories = pgTable("categories", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
-// Junction table for many-to-many relationship
+
 export const postsToCategories = pgTable("posts_to_categories", {
   postId: integer("post_id").notNull().references(() => posts.id, { onDelete: "cascade" }),
   categoryId: integer("category_id").notNull().references(() => categories.id, { onDelete: "cascade" }),
 });
 
-// Relations
+
 export const usersRelations = relations(users, ({ many }) => ({
   posts: many(posts),
   accounts: many(accounts),

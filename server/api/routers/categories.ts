@@ -4,7 +4,7 @@ import { db } from "../../db";
 import { categories } from "../../db/schema";
 import { eq } from "drizzle-orm";
 
-// Helper function to generate slug
+
 function generateSlug(name: string): string {
   return name
     .toLowerCase()
@@ -13,12 +13,12 @@ function generateSlug(name: string): string {
 }
 
 export const categoriesRouter = router({
-  // Get all categories
+  
   getAll: publicProcedure.query(async () => {
     return await db.select().from(categories);
   }),
 
-  // Get category by ID
+  
   getById: publicProcedure
     .input(z.object({ id: z.number() }))
     .query(async ({ input }) => {
@@ -35,7 +35,7 @@ export const categoriesRouter = router({
       return category[0];
     }),
 
-  // Create category
+  
   create: publicProcedure
     .input(
       z.object({
@@ -46,7 +46,7 @@ export const categoriesRouter = router({
     .mutation(async ({ input }) => {
       const slug = generateSlug(input.name);
 
-      // Check if slug already exists
+      
       const existingCategory = await db
         .select()
         .from(categories)
@@ -69,7 +69,7 @@ export const categoriesRouter = router({
       return newCategory[0];
     }),
 
-  // Update category
+  
   update: publicProcedure
     .input(
       z.object({
@@ -81,7 +81,7 @@ export const categoriesRouter = router({
     .mutation(async ({ input }) => {
       const { id, ...updateData } = input;
 
-      // Generate new slug if name is being updated
+      
       if (updateData.name) {
         const slug = generateSlug(updateData.name);
         (updateData as any).slug = slug;
@@ -100,7 +100,7 @@ export const categoriesRouter = router({
       return updatedCategory[0];
     }),
 
-  // Delete category
+  
   delete: publicProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input }) => {

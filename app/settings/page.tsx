@@ -16,7 +16,7 @@ export default function SettingsPage() {
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Save updated settings to your database via API route
+    
     alert("Settings saved successfully (mock)");
   };
 
@@ -32,7 +32,7 @@ export default function SettingsPage() {
         transition={{ duration: 0.5 }}
         className="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-8 border border-gray-200"
       >
-        {/* Header */}
+        {}
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold text-gray-800">Account Settings</h1>
@@ -46,7 +46,7 @@ export default function SettingsPage() {
           </button>
         </div>
 
-        {/* Profile Section */}
+        {}
         <form onSubmit={handleSave} className="space-y-8">
           <div>
             <h2 className="text-lg font-semibold text-gray-700 mb-4">Profile</h2>
@@ -78,7 +78,7 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          {/* Theme Preferences */}
+          {}
           <div>
             <h2 className="text-lg font-semibold text-gray-700 mb-4">Appearance</h2>
             <div className="flex items-center gap-6">
@@ -107,7 +107,7 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          {/* Password Update */}
+          {}
           <div>
             <h2 className="text-lg font-semibold text-gray-700 mb-4">Security</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -136,7 +136,7 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          {/* Save Button */}
+          {}
           <div className="pt-4 border-t border-gray-200">
             <button
               type="submit"

@@ -5,7 +5,7 @@ import { users, posts } from "../../db/schema";
 import { eq } from "drizzle-orm";
 
 export const usersRouter = router({
-  // Get user by ID
+  
   getById: publicProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ input }) => {
@@ -29,7 +29,7 @@ export const usersRouter = router({
       return user[0];
     }),
 
-  // Get user posts count
+  
   getPostsCount: publicProcedure
     .input(z.object({ userId: z.string() }))
     .query(async ({ input }) => {

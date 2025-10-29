@@ -149,7 +149,7 @@ export default function ProfilePage() {
                   )}
                 </div>
 
-                {/* Action Buttons */}
+                {}
                 <div className="flex gap-4 pt-4">
                   {isEditing ? (
                     <>

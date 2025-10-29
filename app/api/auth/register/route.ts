@@ -15,7 +15,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // Check if user already exists
+    
     const existingUser = await db
       .select()
       .from(users)
@@ -29,10 +29,10 @@ export async function POST(req: Request) {
       );
     }
 
-    // Hash password
+    
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create user
+    
     const newUser = await db
       .insert(users)
       .values({

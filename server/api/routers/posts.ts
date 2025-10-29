@@ -5,7 +5,7 @@ import { posts, postsToCategories, users } from "../../db/schema";
 import { eq, desc } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 
-// Helper function to generate slug
+
 function generateSlug(title: string): string {
   return title
     .toLowerCase()
@@ -14,7 +14,7 @@ function generateSlug(title: string): string {
 }
 
 export const postsRouter = router({
-  // Get all posts
+  
   getAll: publicProcedure
     .input(
       z
@@ -52,7 +52,7 @@ export const postsRouter = router({
 
       const allPosts = await query;
 
-      // If categoryId filter is provided
+      
       if (input?.categoryId) {
         const postCategories = await db
           .select()
@@ -66,7 +66,7 @@ export const postsRouter = router({
       return allPosts;
     }),
 
-  // Get post by ID
+  
   getById: publicProcedure
     .input(z.object({ id: z.number() }))
     .query(async ({ input }) => {
@@ -80,7 +80,7 @@ export const postsRouter = router({
         throw new Error("Post not found");
       }
 
-      // Get categories for this post
+      
       const postCategories = await db
         .select()
         .from(postsToCategories)
@@ -92,7 +92,7 @@ export const postsRouter = router({
       };
     }),
 
-  // Get post by slug
+  
   getBySlug: publicProcedure
   .input(z.object({ slug: z.string() }))
   .query(async ({ input }) => {
@@ -122,7 +122,7 @@ export const postsRouter = router({
       throw new Error("Post not found");
     }
 
-    // Get categories for this post
+    
     const postCategories = await db
       .select()
       .from(postsToCategories)
@@ -134,7 +134,7 @@ export const postsRouter = router({
     };
   }),
 
-  // Create post
+  
   create: publicProcedure
     .input(
       z.object({
@@ -142,13 +142,13 @@ export const postsRouter = router({
         content: z.string().min(1, "Content is required"),
         published: z.boolean().default(false),
         categoryIds: z.array(z.number()).optional(),
-        authorId: z.string().optional(), // Add this
+        authorId: z.string().optional(), 
       })
     )
     .mutation(async ({ input }) => {
       const slug = generateSlug(input.title);
 
-      // Check if slug already exists
+      
       const existingPost = await db
         .select()
         .from(posts)
@@ -159,7 +159,7 @@ export const postsRouter = router({
         throw new Error("A post with this title already exists");
       }
 
-      // Create post
+      
       const newPost = await db
         .insert(posts)
         .values({
@@ -167,12 +167,12 @@ export const postsRouter = router({
           content: input.content,
           slug,
           published: input.published,
-          authorId: input.authorId, // Add this
+          authorId: input.authorId, 
           updatedAt: new Date(),
         })
         .returning();
 
-      // Add categories if provided
+      
       if (input.categoryIds && input.categoryIds.length > 0) {
         await db.insert(postsToCategories).values(
           input.categoryIds.map((categoryId) => ({
@@ -185,7 +185,7 @@ export const postsRouter = router({
       return newPost[0];
     }),
 
-  // Update post
+  
   update: publicProcedure
   .input(
     z.object({
@@ -194,13 +194,13 @@ export const postsRouter = router({
       content: z.string().min(1).optional(),
       published: z.boolean().optional(),
       categoryIds: z.array(z.number()).optional(),
-      userId: z.string(), // Add this - the current user's ID
+      userId: z.string(), 
     })
   )
   .mutation(async ({ input }) => {
     const { id, categoryIds, userId, ...updateData } = input;
 
-    // Check if post exists and get its author
+    
     const existingPost = await db
       .select()
       .from(posts)
@@ -214,7 +214,7 @@ export const postsRouter = router({
       });
     }
 
-    // Check if the user is the author
+    
     if (existingPost[0].authorId !== userId) {
       throw new TRPCError({
         code: "FORBIDDEN",
@@ -222,27 +222,27 @@ export const postsRouter = router({
       });
     }
 
-    // Generate new slug if title is being updated
+    
     if (updateData.title) {
       const slug = generateSlug(updateData.title);
       (updateData as any).slug = slug;
     }
 
-    // Update post
+    
     const updatedPost = await db
       .update(posts)
       .set({ ...updateData, updatedAt: new Date() })
       .where(eq(posts.id, id))
       .returning();
 
-    // Update categories if provided
+    
     if (categoryIds !== undefined) {
-      // Remove existing categories
+      
       await db
         .delete(postsToCategories)
         .where(eq(postsToCategories.postId, id));
 
-      // Add new categories
+      
       if (categoryIds.length > 0) {
         await db.insert(postsToCategories).values(
           categoryIds.map((categoryId) => ({
@@ -256,16 +256,16 @@ export const postsRouter = router({
     return updatedPost[0];
   }),
 
-  // Delete post
+  
 delete: publicProcedure
   .input(
     z.object({
       id: z.number(),
-      userId: z.string(), // Add this
+      userId: z.string(), 
     })
   )
   .mutation(async ({ input }) => {
-    // Check if post exists and get its author
+    
     const existingPost = await db
       .select()
       .from(posts)
@@ -279,7 +279,7 @@ delete: publicProcedure
       });
     }
 
-    // Check if the user is the author
+    
     if (existingPost[0].authorId !== input.userId) {
       throw new TRPCError({
         code: "FORBIDDEN",

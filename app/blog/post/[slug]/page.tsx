@@ -101,9 +101,9 @@ export default function BlogPostPage() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="bg-white rounded-xl shadow-lg border p-8 md:p-12 mt-6"
         >
-          {/* Header */}
+          {}
           <header className="mb-8 border-b pb-6">
-            {/* Author Info */}
+            {}
             {post.author && (
               <Link
                 href={`/author/${post.author.id}`}

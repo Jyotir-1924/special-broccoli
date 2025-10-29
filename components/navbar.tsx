@@ -23,7 +23,7 @@ export function Navbar() {
         sessionStorage.setItem("navbarAnimated", "true");
         setHasAnimated(true);
       } catch {
-        // ignore storage errors
+        
       }
     }
   }, [hasAnimated]);
@@ -172,14 +172,7 @@ export function Navbar() {
                           >
                             My Posts
                           </Link>
-                          {/* To update the Settings page
-                          <Link
-                            href="/settings"
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
-                            onClick={() => setIsUserMenuOpen(false)}
-                          >
-                            Settings
-                          </Link> */}
+                          {}
                         </div>
                         <div className="border-t border-gray-300">
                           <button

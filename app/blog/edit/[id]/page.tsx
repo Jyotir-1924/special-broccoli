@@ -54,7 +54,7 @@ export default function EditPostPage() {
       setPublished(post.published);
       setSelectedCategories(post.categoryIds || []);
 
-      // Check if current user is the author
+      
       if (post.authorId === session.user.id) {
         setIsAuthorized(true);
       } else {
@@ -139,7 +139,7 @@ export default function EditPostPage() {
     );
   }
 
-  // Unauthorized access
+  
   if (!isAuthorized) {
     return (
       <div className="min-h-screen bg-gray-50">
@@ -190,7 +190,7 @@ export default function EditPostPage() {
           onSubmit={handleSubmit}
           className="bg-white rounded-xl shadow-lg border p-8"
         >
-          {/* Title */}
+          {}
           <div className="mb-6">
             <label htmlFor="title" className="block text-sm font-semibold text-gray-700 mb-2">
               Title
@@ -205,7 +205,7 @@ export default function EditPostPage() {
             />
           </div>
 
-          {/* Content - Rich Text Editor */}
+          {}
           <div className="mb-6">
             <label className="block text-sm font-semibold text-gray-700 mb-2">
               Content
@@ -216,7 +216,7 @@ export default function EditPostPage() {
             />
           </div>
 
-          {/* Categories */}
+          {}
           {categories && categories.length > 0 && (
             <div className="mb-6">
               <label className="block text-sm font-semibold text-gray-700 mb-3">
@@ -243,7 +243,7 @@ export default function EditPostPage() {
             </div>
           )}
 
-          {/* Published Status */}
+          {}
           <div className="mb-8">
             <label className="flex items-center cursor-pointer">
               <input
@@ -256,7 +256,7 @@ export default function EditPostPage() {
             </label>
           </div>
 
-          {/* Actions */}
+          {}
           <div className="flex flex-wrap gap-4">
             <motion.button
               type="submit"

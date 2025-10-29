@@ -36,7 +36,7 @@ export function BlogCard({ id, title, content, slug, published, createdAt, autho
       whileHover={{ y: -5, transition: { duration: 0.2 } }}
       className="bg-white rounded-xl shadow-md border border-gray-200 p-6 hover:shadow-xl transition-all duration-300"
     >
-      {/* Author Info */}
+      {}
       {author && (
         <Link href={`/author/${author.id}`} className="flex items-center gap-3 mb-4 group">
           {author.image ? (
