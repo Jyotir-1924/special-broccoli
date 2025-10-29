@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { AISummary } from "@/components/ai-summary";
 
 export default function BlogPostPage() {
   const params = useParams();
@@ -160,6 +161,8 @@ export default function BlogPostPage() {
               )}
             </div>
           </header>
+
+          <AISummary content={post.content} />
 
           <div
             className="max-w-none text-black leading-relaxed
