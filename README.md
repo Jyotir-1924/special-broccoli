@@ -441,12 +441,12 @@ Distributed under the MIT License. See `LICENSE` for more information.
 **Jyotiraditya Gautam**
 
 - GitHub: [@Jyotir-1924](https://github.com/Jyotir-1924)
-- LinkedIn: [Your LinkedIn](https://www.linkedin.com/in/jyotiradityagautam/)
-- Email: your.email@example.com
+- LinkedIn: [Jyotiraditya Gautam](https://www.linkedin.com/in/jyotiradityagautam/)
+- Email: jyotiradityagautam@gmail.com
 
 **Project Link:** [https://github.com/Jyotir-1924/special-broccoli](https://github.com/Jyotir-1924/special-broccoli)
 
-**Live Demo:** [https://blogsmith.vercel.app](https://blogsmith.vercel.app)
+**Live Demo:** [Vercel Link](https://blogsmith-tau.vercel.app/)
 
 ---
 
