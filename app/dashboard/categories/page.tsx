@@ -1,9 +1,10 @@
 "use client";
 
+import { AICategorySuggestions } from "@/components/ai-category-suggestions";
 import { Navbar } from "@/components/navbar";
 import { trpc } from "@/lib/trpc";
-import { useState } from "react";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function CategoriesPage() {
   const [name, setName] = useState("");
@@ -83,18 +84,27 @@ export default function CategoriesPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           onSubmit={handleSubmit}
-          className="bg-white rounded-xl shadow-md border p-6 mb-8 text-gray-600"
+          className="bg-white rounded-xl shadow-md border border-amber-500 p-6 mb-8 text-gray-600"
         >
-          <h2 className="text-xl font-semibold mb-4 text-black">
-            {editingId ? "Edit Category" : "Create New Category"}
-          </h2>
-
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-semibold">
+              {editingId ? "Edit Category" : "Create New Category"}
+            </h2>
+            {!editingId && (
+              <AICategorySuggestions
+                onSelectCategory={(categoryName, categoryDescription) => {
+                  setName(categoryName);
+                  setDescription(categoryDescription);
+                }}
+              />
+            )}
+          </div>
           <div className="mb-4">
             <label
               htmlFor="name"
               className="block text-sm font-semibold text-gray-700 mb-2"
             >
-              Category Name
+              Name
             </label>
             <input
               type="text"
@@ -102,11 +112,11 @@ export default function CategoriesPage() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff751f] focus:border-transparent transition-all"
-              placeholder="e.g., Technology, Travel, Food"
+              placeholder="ex: Technology, Travel, Food"
               required
             />
           </div>
-          <div className="mb-6">
+          <div className="mb-4">
             <label
               htmlFor="description"
               className="block text-sm font-semibold text-gray-700 mb-2"
@@ -122,6 +132,7 @@ export default function CategoriesPage() {
               placeholder="Brief description of this category..."
             />
           </div>
+
           <div className="flex gap-4">
             <motion.button
               type="submit"
@@ -172,9 +183,7 @@ export default function CategoriesPage() {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {categories.map((category) => (
-                    <motion.tr
-                      key={category.id}
-                    >
+                    <motion.tr key={category.id}>
                       <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">
                         {category.name}
                       </td>

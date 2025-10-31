@@ -53,7 +53,9 @@ export default function Home() {
                 Share Your Stories
               </span>
               <br />
-              <span className="text-gray-900">with the World</span>
+              <span className="bg-linear-to-r from-[#ff751f] to-[#000000] bg-clip-text text-transparent">
+                with the World
+              </span>
             </motion.h1>
             <motion.p
               variants={fadeInUp}
@@ -121,15 +123,15 @@ export default function Home() {
               className="mt-20 grid grid-cols-3 gap-8 max-w-2xl mx-auto"
             >
               <div>
-                <p className="text-4xl font-bold text-[#ff751f]">1000+</p>
+                <p className="text-4xl font-bold text-[#ff751f]">31+</p>
                 <p className="text-gray-600 mt-2">Active Writers</p>
               </div>
               <div>
-                <p className="text-4xl font-bold text-[#ff751f]">5000+</p>
+                <p className="text-4xl font-bold text-[#ff751f]">100+</p>
                 <p className="text-gray-600 mt-2">Blog Posts</p>
               </div>
               <div>
-                <p className="text-4xl font-bold text-[#ff751f]">50K+</p>
+                <p className="text-4xl font-bold text-[#ff751f]">25+</p>
                 <p className="text-gray-600 mt-2">Readers</p>
               </div>
             </motion.div>
@@ -161,7 +163,7 @@ export default function Home() {
               Everything you need to create, publish, and grow your blog
             </p>
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mx-4">
             {[
               {
                 icon: "✍️",
@@ -181,6 +183,12 @@ export default function Home() {
                 description:
                   "Built with Next.js and optimized for speed. Your readers will love the experience.",
               },
+              {
+                icon: "🤖",
+                title: "AI Powered",
+                description:
+                  "Enhance your creativity with AI-assisted summaries and content suggestions.",
+              },
             ].map((feature, index) => (
               <motion.div
                 key={index}
@@ -192,7 +200,7 @@ export default function Home() {
                 className="relative group"
               >
                 <div className="absolute inset-0 bg-linear-to-r from-[#ff751f]/10 to-transparent rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300" />
-                <div className="relative bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300">
+                <div className="relative bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 flex flex-col items-center text-center min-h-80">
                   <div className="text-6xl mb-6">{feature.icon}</div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">
                     {feature.title}
@@ -304,7 +312,7 @@ export default function Home() {
           <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
             <p>
               © 2025 <span className="text-white font-semibold">Blogsmith</span>
-              . Built with passion ☕ and ❤️ for writers everywhere.
+              . Built with passion, ☕ and ❤️ for writers everywhere.
             </p>
             <p className="mt-2">
               <span className="text-gray-500">Created by</span>{" "}
