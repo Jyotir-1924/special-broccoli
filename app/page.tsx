@@ -148,22 +148,22 @@ export default function Home() {
         </motion.div>
       </section>
       <section className="py-32 bg-white">
-        <div className="container text-center">
+        <div className="container mx-auto text-center flex flex-col items-center justify-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="mb-20"
+            className="mb-20 max-w-3xl"
           >
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6 leading-tight">
               Why Choose <span className="text-[#ff751f]">Blogsmith</span>?
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600">
               Everything you need to create, publish, and grow your blog
             </p>
           </motion.div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mx-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center px-6 max-w-7xl">
             {[
               {
                 icon: "✍️",
@@ -197,10 +197,10 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ y: -10, transition: { duration: 0.2 } }}
-                className="relative group"
+                className="relative group flex justify-center"
               >
                 <div className="absolute inset-0 bg-linear-to-r from-[#ff751f]/10 to-transparent rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300" />
-                <div className="relative bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 flex flex-col items-center text-center min-h-80">
+                <div className="relative bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 flex flex-col items-center text-center min-h-80 w-full max-w-xs">
                   <div className="text-6xl mb-6">{feature.icon}</div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">
                     {feature.title}
@@ -214,21 +214,23 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="py-32 bg-linear-to-tr from-[#ff751f] to-[#8f3700] relative overflow-hidden">
-        <div className="container relative z-10 text-center">
+      <section className="py-32 bg-linear-to-tr from-[#ff751f] to-[#8f3700] relative overflow-hidden flex items-center justify-center text-center">
+        <div className="container relative z-10 flex flex-col items-center justify-center px-6">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="max-w-3xl"
           >
-            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
               Ready to Start Your Journey?
             </h2>
             <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
               Join our community of writers and share your unique voice with the
               world.
             </p>
+
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="/blog/new"
@@ -253,24 +255,26 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
       <footer className="bg-black text-white py-16">
-        <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-            <div className="col-span-1 mx-4 md:col-span-2 ">
+        <div className="container mx-auto px-6 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 justify-items-center">
+            <div className="flex flex-col items-center md:items-start text-center md:text-left max-w-md">
               <Image
                 src="/assets/images/BSlogo.png"
                 alt="Blogsmith Logo"
                 width={300}
                 height={80}
                 priority
+                className="mx-auto md:mx-0 mb-4"
               />
-              <p className="text-gray-400 mb-6 max-w-md md:text-xl sm:text-xs text-justify ">
+              <p className="text-gray-400 md:text-lg sm:text-sm text-justify md:text-left">
                 A modern blogging platform built for writers who care about
                 their craft. Create, publish, and share your stories with ease.
               </p>
             </div>
-            <div>
-              <h4 className="font-semibold mb-4">Quick Links</h4>
+            <div className="text-left">
+              <h4 className="font-semibold text-xl mb-4">Quick Links</h4>
               <ul className="space-y-2">
                 <li>
                   <Link
@@ -298,9 +302,9 @@ export default function Home() {
                 </li>
               </ul>
             </div>
-            <div>
-              <h4 className="font-semibold mb-4">Tech Stack</h4>
-              <ul className="space-y-2 text-gray-400 text-sm">
+            <div className="text-left">
+              <h4 className="font-semibold text-xl mb-4">Tech Stack</h4>
+              <ul className="space-y-2 text-gray-400">
                 <li>Next.js 15</li>
                 <li>TypeScript</li>
                 <li>tRPC</li>
@@ -309,7 +313,9 @@ export default function Home() {
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
+
+          {/* Bottom Section */}
+          <div className="border-t border-gray-800 pt-8 text-gray-400 text-center">
             <p>
               © 2025 <span className="text-white font-semibold">Blogsmith</span>
               . Built with passion, ☕ and ❤️ for writers everywhere.
